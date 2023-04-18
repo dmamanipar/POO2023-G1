@@ -5,14 +5,14 @@
 
 [Programación Java](https://drive.google.com/file/d/1TcAQVsUFGIG9C7QKWaFJ0VVpYHpcSpHf/view)
 # Comandos clonar un repositorio en su PC
-
 ```console
 d:
-cd "DESARROLLO 2022"
+cd "DESARROLLO 2023"
 dir
-git clone https://github.com/davidmp/FundamentosP2022-G1.git
+git clone -b <nombreBranch> https://github.com/davidmp/FundamentosP2022-G1.git
 doskey /history
 ```
+[Comandos para trabajar con ramas](https://docs.google.com/presentation/d/1T_p1gdUol1fm7hfMCzobEvEzWoFgvkTb/edit#slide=id.g22d070b325e_4_0)
 
 # Comandos para subir a Github desde Repositorio local de PC o Plataformas Online
 
