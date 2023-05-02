@@ -13,7 +13,8 @@ import lombok.Data;
 @Data
 public class PostulanteTO {
     public int idPostulante, idCarrera, idPeriodo;
-    public String dni, nombre, apellido_pat,apellido_mat,modalidad, estado;
+    public String dni, nombre, apellidoPat,apellidoMat,modalidad, estado;
+    public String nombrePeriodo, nombreCarrera, nombreModalidad;
     
     
 }

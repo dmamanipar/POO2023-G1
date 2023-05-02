@@ -138,7 +138,14 @@ jtpane.add("main", scrollPane);*/
                 pp1.setPreferredSize(new Dimension(2000, 1000));
                 JPanel pp2 = new JPanel();
                 pp2.setPreferredSize(new Dimension(2000, 1000));
+                MainPostulante mp=new MainPostulante();
+                mp.setPreferredSize(new Dimension(2000, 1000));
+                scrollPane = new JScrollPane(mp);
+                scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);     
+                
                 jtpane.setBounds(10, 20, 400, 200);
+                jtpane.add("Main Postulante", scrollPane);
                 jtpane.add("visit", pp1);
                 jtpane.add("ver", pp2);
                 jtpane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);

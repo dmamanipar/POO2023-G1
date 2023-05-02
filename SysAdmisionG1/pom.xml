@@ -28,7 +28,7 @@
         <dependency>
             <groupId>com.github.davidmp</groupId>
             <artifactId>SysSwingDmp</artifactId>
-            <version>v1.8</version>
+            <version>v1.9</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
