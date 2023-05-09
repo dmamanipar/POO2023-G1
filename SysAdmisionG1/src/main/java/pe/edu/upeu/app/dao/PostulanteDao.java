@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
 import pe.edu.upeu.app.conexion.ConnS;
@@ -113,21 +114,13 @@ public class PostulanteDao implements PostulanteDaoI {
                 cli.setIdPeriodo(rs.getInt("id_periodo"));
                 cli.setNombrePeriodo(rs.getString("nombreperiodo"));
                 cli.setNombreCarrera(rs.getString("nombrecarrera"));
-                cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
+                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
                 listarEntidad.add(cli);
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
         return listarEntidad;
-    }
-
-    public static void main(String[] args) {
-        PostulanteDao po = new PostulanteDao();
-        po.listarTodo();
-        int i = 0;
-
-        System.out.println("F1:" + (i++));
     }
 
     @Override
@@ -143,7 +136,47 @@ public class PostulanteDao implements PostulanteDaoI {
             throw new Exception("Detalle:" + ex.getMessage());
         }
         return comit;
+    }    
+        
+    public static void main(String[] args) {
+        Scanner cs=new Scanner(System.in);
+        PostulanteDao po = new PostulanteDao();
+        
+        int i = 0;
+        String opcion="R";
+        String mensajeOpciones="Menu de Opciones\nR=Reportar\nC=Crear\nU=Update\nD=Delete\nX=Salir";        
+        do{
+            switch (opcion) {
+                case "C" -> {
+                }
+                case "R" -> po.listarPostulantes(po.listarTodo());
+                case "U" -> {
+                }
+                case "D" -> {
+                    try {
+                        System.out.println("Ingrese el DNI del Registro que desea eliminar:");
+                        po.delete(cs.next());
+                        po.listarPostulantes(po.listarTodo());
+                    } catch (Exception e) { System.err.println("Error al Eliminar"); }
+                }                    
+                default -> System.out.println("Opcion no existe intente otra vez!");
+            }
+            System.out.println("Que desea hacer:\n"+mensajeOpciones);
+            opcion=cs.next();
+        }while(!opcion.toUpperCase().equals("X"));
+        
+        System.out.println("F1:" + (i++));
     }
+    
+    public void listarPostulantes(List<PostulanteTO> lista){
+        System.out.println("DNI\t\tNombre\t\t\tApellidos\t\t\tCarrera Post.");
+        for (PostulanteTO p: lista) {
+            System.out.println(p.getDni()+"\t"+p.getNombre()+"\t\t\t"
+                    +p.getApellidoPat()+" "+p.getApellidoMat()+"\t\t\t"+p.getNombreCarrera());
+        }
+    }
+
+
 
     @Override
     public List<PostulanteTO> listCmb(String filter) {

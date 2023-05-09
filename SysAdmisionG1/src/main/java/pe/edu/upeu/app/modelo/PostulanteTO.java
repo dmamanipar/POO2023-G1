@@ -14,6 +14,7 @@ import lombok.Data;
 public class PostulanteTO {
     public int idPostulante, idCarrera, idPeriodo;
     public String dni, nombre, apellidoPat,apellidoMat,modalidad, estado;
+    //Adicionales por cada forany key
     public String nombrePeriodo, nombreCarrera, nombreModalidad;
     
     
