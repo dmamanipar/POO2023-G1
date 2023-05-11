@@ -16,6 +16,14 @@ public class PostulanteTO {
     public String dni, nombre, apellidoPat,apellidoMat,modalidad, estado;
     //Adicionales por cada forany key
     public String nombrePeriodo, nombreCarrera, nombreModalidad;
+
+    public void setAreaPeriodo(String next) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setPregunta(String next) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 }
