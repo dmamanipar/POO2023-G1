@@ -8,22 +8,23 @@ import lombok.Data;
 
 /**
  *
- * @author EP-Ing_Sist.-CALIDAD
+ * @author ACER
  */
 @Data
-public class PostulanteTO {
-    public int idPostulante, idCarrera, idPeriodo;
-    public String dni, nombre, apellidoPat,apellidoMat,modalidad, estado;
-    //Adicionales por cada forany key
-    public String nombrePeriodo, nombreCarrera, nombreModalidad;
+public class AreaPeriodoTO {
+    public int IdArea, IdPeriodo;
 
-    public int getIdArea() {
+public int getIdArea(String next) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public int getIdPeriodo() {
+    public int getIdPeriodo(String next) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
+
+
+
+   
+
+
 }
