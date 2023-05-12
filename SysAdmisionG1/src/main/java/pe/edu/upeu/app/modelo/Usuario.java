@@ -9,7 +9,7 @@ package pe.edu.upeu.app.modelo;
  * @author User
  */
 public class Usuario {
-    
+     
     private int id;
     private String user;
     private String clave;
