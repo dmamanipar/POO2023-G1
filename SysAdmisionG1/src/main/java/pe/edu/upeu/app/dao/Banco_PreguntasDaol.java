@@ -7,23 +7,24 @@ package pe.edu.upeu.app.dao;
 import java.util.List;
 import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
 import pe.edu.upeu.app.modelo.ComboBoxOption;
-import pe.edu.upeu.app.modelo.PreguntasTO;
+import pe.edu.upeu.app.modelo.BancopreguntasTO;
 
 /**
  *
- * @author romer
+ * @author Jose MP
  */
-public interface PreguntasDaoI {
-    
+public interface Banco_PreguntasDaol {
+        
 
-public int create(PreguntasTO d);
-public int update(PreguntasTO d);
+public int create(BancopreguntasTO d);
+public int update(BancopreguntasTO d);
 public int delete(String id) throws Exception;
-public List<PreguntasTO> listCmb(String filter);
-public List<PreguntasTO> listarTodo();
+public List<BancopreguntasTO> listCmb(String filter);
+public List<BancopreguntasTO> listarTodo();
 public List<ModeloDataAutocomplet> listAutoComplet(String filter); 
 public List<ComboBoxOption> listaModalidadExamen();
 public List<ComboBoxOption> listarPeriodo();
 public List<ModeloDataAutocomplet> listAutoCompletCarrera(String filter);
 public String buscarModalidadExamen(String id);
 }
+
