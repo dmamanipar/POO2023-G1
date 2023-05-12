@@ -14,6 +14,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
 import pe.edu.upeu.app.conexion.ConnS;
+import pe.edu.upeu.app.modelo.AreaPeriodoResultTO;
 import pe.edu.upeu.app.modelo.ComboBoxOption;
 import pe.edu.upeu.app.modelo.PostulanteTO;
 import pe.edu.upeu.app.util.ErrorLogger;
@@ -266,6 +267,22 @@ public class PostulanteDao implements PostulanteDaoI {
 
     @Override
     public String buscarModalidadExamen(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    void listarAreaPeriodoResult(List<PostulanteTO> listarTodo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    void create(AreaPeriodoResultTO tox) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    void update(AreaPeriodoResultTO tox) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    AreaPeriodoResultTO buscarEntidad() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
