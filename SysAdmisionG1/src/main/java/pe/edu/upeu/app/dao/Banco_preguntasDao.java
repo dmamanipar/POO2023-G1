@@ -76,14 +76,49 @@ public class Banco_preguntasDao {
         }
         return listarEntidad;
     }
-    
-
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public BancopreguntasTO buscarEntidad(String id_area) {
+BancopreguntasTO cli = new BancopreguntasTO();
+        String sql = "SELECT *FROM banco_preguntas WHERE id_area=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, id_area);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cli.setIdBancopreguntas(rs.getInt("id_bp"));
+                cli.setIdArea(rs.getInt("id_area"));
+                cli.setPregunta(rs.getString("pregunta"));
+                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));               
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return cli;
     }
-    
+
+    @Override
+    public List<ModeloDataAutocomplet> listAutoComplet(String filter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ComboBoxOption> listaModalidadExamen() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ComboBoxOption> listarPeriodo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ModeloDataAutocomplet> listAutoCompletCarrera(String filter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String buscarModalidadExamen(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
 }
