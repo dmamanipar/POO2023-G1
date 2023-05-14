@@ -108,5 +108,6 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>        
+    </build>
+    <name>SysAdmisionG1</name>
 </project>
