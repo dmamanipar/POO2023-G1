@@ -4,11 +4,16 @@
  */
 package pe.edu.upeu.app.modelo;
 
+import lombok.Data;
+
 
 /**
  *
- * @author Jose MP
+ * @author HP
  */
-public class BancopreguntasTO {
-    
+
+@Data
+public class Resultado_finalTO {
+    public int idresultfinal, idpostulante, idperiodo, idcarrera, idevalpsicologica;
+    public String dni, punto_conocimiento, punto_entrevista;
 }

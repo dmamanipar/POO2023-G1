@@ -4,11 +4,13 @@
  */
 package pe.edu.upeu.app.dao;
 
+import java.util.List;
+import pe.edu.upeu.app.modelo.Resultado_finalTO;
 
 /**
  *
- * @author romer
+ * @author HP
  */
-public interface AreasDaoI {
-    
+public interface Resultado_finalDaoI {
+    public List<Resultado_finalTO> ListarTodo();
 }
