@@ -23,7 +23,7 @@ import pe.edu.upeu.app.util.ErrorLogger;
  *
  * @author acer
  */
-public class PreguntasDao {
+public class PreguntasDao implements PreguntasDaoI{
      ConnS instance = ConnS.getInstance();
     Connection connection = instance.getConnection();
     PreparedStatement ps;
@@ -32,10 +32,11 @@ public class PreguntasDao {
     ErrorLogger log = new ErrorLogger(PreguntasDao.class.getName());
     
     //Crear
+     @Override
     public int create(PreguntasTO d) {
         int rsId = 0;
-        String[] returns = {"DNI"};
-        String sql = "INSERT INTO pregunta(id_dni, id_area_periodo "
+        String[] returns = {"dni"};
+        String sql = "INSERT INTO preguntas(id_Bp, id_area_periodo "
                 + " resultado, numero) "
                 + " values(?, ?, ?, ?);";
         int i = 0;
@@ -43,6 +44,7 @@ public class PreguntasDao {
             ps = connection.prepareStatement(sql, returns);
             ps.setInt(++i, d.getIdPreguntas());
             ps.setInt(++i, d.getIdBp());
+            ps.setString(++i, d.getDni());
             ps.setString(++i, d.getIdAreaPeriodo());
             ps.setString(++i, d.getResultado());
             ps.setString(++i, d.getNumero());
@@ -60,8 +62,10 @@ public class PreguntasDao {
     }
     
     //Actualizar
+    
+     @Override
     public int update(PreguntasTO d) {
-        System.out.println("actualizar d.getdni: " + d.getBp());
+        System.out.println("actualizar d.getdni: " + d.getdni());
         int comit = 0;
         String sql = "UPDATE resultado de SET "
                 + "resultado=?, ";
@@ -77,11 +81,12 @@ public class PreguntasDao {
     }
     
     
+     @Override
     public List<PreguntasTO> listarTodo() {
         List<PreguntasTO> listarEntidad = new ArrayList();
-        String sql = "SELECT p.*, p.pregunta as nombreareaperiodo, b.bp "
-                + "FROM pregunta p, areaperiodo ap, bp b "
-                + "WHERE ap.id_areaperiodo = p.id_pregunta and p.id_bp = b.id_bp";
+        String sql = "SELECT po.*, p.pregunta as nombrearea_periodo, b.bp "
+                + "FROM pregunta po, area_periodo ap, bp b "
+                + "WHERE p.id_areaperiodo = po.id_pregunta and po.id_bp = b.id_bp";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -90,8 +95,7 @@ public class PreguntasDao {
                 cli.setDni(rs.getString("dni"));
                 cli.setIdPregunta(rs.getInt("id_pregunta"));
                 cli.setIdBp(rs.getInt("id_bp"));
-                cli.setNombreAreaPeriodo(rs.getString("nombreareaperiodo"));
-                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
+                cli.setNombreAreaPeriodo(rs.getString("nombrearea_periodo"));
                 listarEntidad.add(cli);
             }
         } catch (SQLException e) {
@@ -101,6 +105,7 @@ public class PreguntasDao {
     }
     
     //Eliminar
+     @Override
     public int delete(String id) throws Exception {
         int comit = 0;
         String sql = "DELETE FROM pregunta WHERE dni = ?";
@@ -127,14 +132,10 @@ public class PreguntasDao {
             switch (opcion) {
                 case "C" -> {
                     PreguntasTO tox = new PreguntasTO();
-                    System.out.println("Ingrese el dni:");
+                    System.out.println("Ingrese el DNI:");
                     tox.setDni(cs.next());
-                    System.out.println("Ingres Resultado:");
-                    tox.setResultado(cs.next());
-                    System.out.println("Ingrese Numero :");
-                    tox.setNumero(cs.next());
-                    System.out.println("Ingrese Pregunta:");
-                    tox.setPregunta(cs.next());
+                    System.out.println("Ingrese el Perido(1=2023-1):");
+                    tox.setIdPeriodo(cs.nextInt());
                     System.out.println("Ingrese Modalidad(E=Examen, PI=Primeros Puestos):");
                 }
                 case "R" ->
@@ -177,29 +178,67 @@ public class PreguntasDao {
         }
     }
 
-    public PostulanteTO buscarEntidad(String bp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public PostulanteTO buscarEntidad(String dni) {
+        PostulanteTO cli = new PostulanteTO();
+        String sql = "SELECT po.*, p.nombre as nombreperiodo, c.nombrecarrera "
+                + "FROM postulante po, periodo p, carrera c "
+                + "WHERE p.id_periodo = po.id_periodo and po.id_carrera = c.id_carrera"
+                + " and po.dni=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, dni);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cli.setDni(rs.getString("dni"));
+                cli.setModalidad(rs.getString("modalidad"));
+                cli.setIdCarrera(rs.getInt("id_carrera"));
+                cli.setIdPeriodo(rs.getInt("id_periodo"));
+
+                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));               
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return cli;
     }
+
 
     public void update(PostulanteTO tox) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+     @Override
     public List<PreguntasTO> listCmb(String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+     @Override
     public List<ModeloDataAutocomplet> listAutoComplet(String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     
+     @Override
     public List<ComboBoxOption> listaModalidadExamen() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
+    /**
+     *
+     * @return
+     */
+    @Override
     public List<ComboBoxOption> listarPeriodo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ModeloDataAutocomplet> listAutoCompletCarrera(String filter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String buscarModalidadExamen(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
