@@ -19,6 +19,6 @@ public interface AreaPeriodoDaoI {
     public int update(AreaPeriodoTO d);
     public int delete(String id) throws Exception;
     public List<AreaPeriodoTO> listarTodo();
-    public AreaPeriodoTO buscarEntidad(String IdArea);
+    public AreaPeriodoTO buscarEntidad(int IdArea);
 
 }

@@ -12,15 +12,9 @@ import lombok.Data;
  */
 @Data
 public class AreaPeriodoTO {
-    public int IdArea, IdPeriodo;
+    public int IdAreaPeriodo, IdArea, IdPeriodo;
+    public String NombreArea, Nombre;
 
-public int getIdArea(String next) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public int getIdPeriodo(String next) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 
 
