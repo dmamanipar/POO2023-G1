@@ -63,14 +63,15 @@ System.out.println("actualizar d.getIdArea: " + d.getIdArea());
         int comit = 0;
         String sql = "UPDATE banco_preguntas SET "
                 + "pregunta=?, "
-                + "id_area=?"
-                + "WHERE id_area=?";
+                + "id_area=? "
+                + "WHERE id_bp=?";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql);
-            ps.setInt(++i, d.getIdArea());
-            //ps.setInt(++i, d.getIdBancoPreguntas());
             ps.setString(++i, d.getPregunta());
+            ps.setInt(++i, d.getIdArea());
+            ps.setInt(++i, d.getIdBancoPreguntas());
+
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "update", ex);
@@ -79,12 +80,12 @@ System.out.println("actualizar d.getIdArea: " + d.getIdArea());
     }
 
     @Override
-    public int delete(String id) throws Exception {
+    public int delete(int id) throws Exception {
   int comit = 0;
-        String sql = "DELETE FROM banco_preguntas WHERE id_area = ?";
+        String sql = "DELETE FROM banco_preguntas WHERE id_bp = ?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setInt(1, id);
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "delete", ex);
@@ -115,9 +116,9 @@ System.out.println("actualizar d.getIdArea: " + d.getIdArea());
                     po.listarPostulantes(po.listarTodo());
                 case "U" -> {
                     BancoPreguntasTO tox;
-                    System.out.println("Ingrese el ID de Area a Modificar:");
-                    String id_area =cs.next();
-                    tox=po.buscarEntidad(id_area);
+                    System.out.println("Ingrese el ID de BP a Modificar:");
+                    int id_bp =cs.nextInt();
+                    tox=po.buscarEntidad(id_bp);
                     System.out.println("Ingrese Nueva Pregunta:");
                     tox.setPregunta(cs.next());
                                        
@@ -126,8 +127,8 @@ System.out.println("actualizar d.getIdArea: " + d.getIdArea());
                 }
                 case "D" -> {
                     try {
-                        System.out.println("Ingrese el Id Area del Registro que desea eliminar:");
-                        po.delete(cs.next());
+                        System.out.println("Ingrese el Id de BP del Registro que desea eliminar:");
+                        po.delete(cs.nextInt());
                         po.listarPostulantes(po.listarTodo());
                     } catch (Exception e) {
                         System.err.println("Error al Eliminar");
@@ -143,10 +144,10 @@ System.out.println("actualizar d.getIdArea: " + d.getIdArea());
         System.out.println("F1:" + (i++));
     }
       public void listarPostulantes(List<BancoPreguntasTO> lista) {
-        System.out.println("IdBP\tUIdArea\t\t\tPregunta\t\t\t.");
+        System.out.println("IdBP\tIdArea\t\t\tPregunta\t\t\t\t\tNombrePregunta.");
         for (BancoPreguntasTO a : lista) {
             System.out.println(a.getIdBancoPreguntas()+ "\t" + a.getIdArea()+ "\t\t\t"
-                    + a.getPregunta());
+                    + a.getPregunta() + "\t\t\t" + a.getNombrearea());
         }
     }
 
@@ -158,7 +159,8 @@ System.out.println("actualizar d.getIdArea: " + d.getIdArea());
     @Override
     public List<BancoPreguntasTO> listarTodo() {
         List<BancoPreguntasTO> listarEntidad = new ArrayList();
-        String sql = "SELECT * FROM banco_preguntas";
+        String sql = "SELECT po.*,a.nombrearea FROM banco_preguntas po, areas a " + 
+                " WHERE po.id_area=a.id_area;";
 
         try {
             ps = connection.prepareStatement(sql);
@@ -168,6 +170,7 @@ System.out.println("actualizar d.getIdArea: " + d.getIdArea());
                 cli.setIdBancoPreguntas(rs.getInt("id_bp"));
                 cli.setIdArea(rs.getInt("id_area"));
                 cli.setPregunta(rs.getString("pregunta"));
+                cli.setNombrearea(rs.getString("nombrearea"));
 
                 //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
                 listarEntidad.add(cli);
@@ -179,12 +182,12 @@ System.out.println("actualizar d.getIdArea: " + d.getIdArea());
     }
  
     @Override
-    public BancoPreguntasTO buscarEntidad(String id_area) {
+    public BancoPreguntasTO buscarEntidad(int id_bp) {
 BancoPreguntasTO cli = new BancoPreguntasTO();
-        String sql = "SELECT *FROM banco_preguntas WHERE id_area=?";
+        String sql = "SELECT *FROM banco_preguntas WHERE id_bp=?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, id_area);
+            ps.setInt(1, id_bp);
             rs = ps.executeQuery();
             if (rs.next()) {
                 cli.setIdBancoPreguntas(rs.getInt("id_bp"));

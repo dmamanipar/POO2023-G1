@@ -8,7 +8,7 @@ import java.util.List;
 import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
 import pe.edu.upeu.app.modelo.BancoPreguntasTO;
 import pe.edu.upeu.app.modelo.ComboBoxOption;
-import pe.edu.upeu.app.modelo.PostulanteTO;
+
 
 /**
  *
@@ -17,10 +17,10 @@ import pe.edu.upeu.app.modelo.PostulanteTO;
 public interface BancoPreguntasDaoI {
     public int create(BancoPreguntasTO d);
 public int update(BancoPreguntasTO d);
-public int delete(String id) throws Exception;
+public int delete(int id) throws Exception;
 public List<BancoPreguntasTO> listCmb(String filter);
 public List<BancoPreguntasTO> listarTodo();
-public BancoPreguntasTO buscarEntidad(String id_area);
+public BancoPreguntasTO buscarEntidad(int id_bp);
 public List<ModeloDataAutocomplet> listAutoComplet(String filter); 
 public List<ComboBoxOption> listaModalidadExamen();
 public List<ComboBoxOption> listarPeriodo();
