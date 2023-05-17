@@ -13,11 +13,11 @@ import java.util.List;
  *
  * @author Data_Science
  */
-public class FacultadDAO {
+public class FacultadDao {
 
     private Connection conn;
 
-    public FacultadDAO() {
+    public FacultadDao() {
         try {
             conn = DriverManager.getConnection("a", "usuario", "contraseña");
         } catch (SQLException e) {
@@ -25,14 +25,14 @@ public class FacultadDAO {
         }
     }
 
-    public List<FacultadDAO> obtenerFacultades() {
-        List<FacultadDAO> facultades = new ArrayList<>();
+    public List<FacultadDao> obtenerFacultades() {
+        List<FacultadDao> facultades = new ArrayList<>();
         String sql = "SELECT  FROM facultad";
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                FacultadDAO facultad = new FacultadDAO();
+                FacultadDao facultad = new FacultadDao();
                 facultad.setId(rs.getInt("id_facultad"));
                 facultad.setNombre(rs.getString("nombrefacultad"));
                 facultades.add(facultad);
@@ -43,15 +43,15 @@ public class FacultadDAO {
         return facultades;
     }
 
-    public FacultadDAO obtenerFacultadPorId(int id) {
-        FacultadDAO facultad = null;
+    public FacultadDao obtenerFacultadPorId(int id) {
+        FacultadDao facultad = null;
         String sql = "SELECT  FROM facultad WHERE id_facultad = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                facultad = new FacultadDAO();
+                facultad = new FacultadDao();
                 facultad.setId(rs.getInt("id_facultad"));
                 facultad.setNombre(rs.getString("nombrefacultad"));
             }
@@ -61,7 +61,7 @@ public class FacultadDAO {
         return facultad;
     }
 
-    public void crearFacultad(FacultadDAO facultad) {
+    public void crearFacultad(FacultadDao facultad) {
         String sql = "INSERT INTO facultad (nombrefacultad) VALUES (?)";
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -83,6 +83,5 @@ public class FacultadDAO {
     private void setId(int aInt) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
 
 }
