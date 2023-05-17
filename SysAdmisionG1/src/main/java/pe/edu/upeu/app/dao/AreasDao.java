@@ -4,6 +4,7 @@
  */
 package pe.edu.upeu.app.dao;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,13 +35,13 @@ public class AreasDao implements AreasDaoI {
     @Override
     public int create(AreasTO d) {
         int rsId = 0;
-        String[] returns = {"idarea"};
-        String sql = "INSERT INTO areas(id_area, nombrearea, siglas, )"
+        String[] returns = {"id_area"};
+        String sql = "INSERT INTO areas(id_area, nombrearea, siglas)"
                 + " values(?, ?, ?);";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql, returns);
-            ps.setInt(++i, d.getIdArea());
+            ps.setInt(++i, d.getIdAreas());
             ps.setString(++i, d.getNombreArea());
             ps.setString(++i, d.getSiglas());
             rsId = ps.executeUpdate();// 0 no o 1 si commit
@@ -56,20 +57,22 @@ public class AreasDao implements AreasDaoI {
         return rsId;
     }
 
+   
     @Override
     public int update(AreasTO d) {
-        System.out.println("actualizar d.IdAreas: " + d.getidareas());
+        System.out.println("actualizar d.nombrearea: " + d.getNombreArea());
         int comit = 0;
        String sql = "UPDATE areas SET "
-                + "id_area=?, "
                 + "nombrearea=?, "
-                + "siglas=?, ";
+                + "siglas=? "
+               + "WHERE id_area=? ";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql);
+            
             ps.setString(++i, d.getNombreArea());
             ps.setString(++i, d.getSiglas());
-            ps.setInt(++i, d.getIdArea());
+            ps.setInt(++i, d.getIdAreas());
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "update", ex);
@@ -80,18 +83,15 @@ public class AreasDao implements AreasDaoI {
     @Override
     public List<AreasTO> listarTodo() {
         List<AreasTO> listarEntidad = new ArrayList();
-        String sql = "SELECT po.*, n.id_area as nombrearea, s.siglas "
-                + "FROM areas po, nombrearea n, siglas s "
-                + "WHERE p.id_area = po.id_area";
-        //Falta mostrar el contenido de la tabla
+        String sql = "SELECT * FROM areas";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 AreasTO cli = new AreasTO();
-                cli.setIdArea(rs.getInt("id_area"));
+                cli.setIdAreas(rs.getInt("id_area"));
                 cli.setNombreArea(rs.getString("nombrearea"));
-                cli.setSiglas(rs.getString("Siglas"));
+                cli.setSiglas(rs.getString("siglas"));
                 listarEntidad.add(cli);
             }
         } catch (SQLException e) {
@@ -101,12 +101,12 @@ public class AreasDao implements AreasDaoI {
     }
 
     @Override
-    public int delete(String id) throws Exception {
+    public int delete(int id) throws Exception {
         int comit = 0;
-        String sql = "DELETE FROM areas WHERE idareas = ?";
+        String sql = "DELETE FROM areas WHERE id_area = ?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setInt(1, id);
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "delete", ex);
@@ -126,11 +126,11 @@ public class AreasDao implements AreasDaoI {
             switch (opcion) {
                 case "C" -> {
                     AreasTO tox = new AreasTO();
-                    System.out.println("Ingrese Area:");
-                    tox.setIdArea(cs.nextInt());
-                    System.out.println("Ingres Nombre Area:");
+                    System.out.println("Ingrese número de orden del Area: ");
+                    tox.setIdAreas(cs.nextInt());
+                    System.out.println("Ingrese Nombre Area: ");
                     tox.setNombreArea(cs.next());
-                    System.out.println("Ingres sigla:");
+                    System.out.println("Ingrese sigla: ");
                     tox.setSiglas(cs.next());
                     po.create(tox);
                     po.listarAreas(po.listarTodo());
@@ -139,20 +139,20 @@ public class AreasDao implements AreasDaoI {
                     po.listarAreas(po.listarTodo());
                 case "U" -> {
                     AreasTO tox;
-                    System.out.println("Ingrese el nombre del area:");
-                    String siglas=cs.next();
-                    tox=po.buscarEntidad(siglas);
-                    System.out.println("Ingres Nuevo Nombre:");
+                    System.out.println("Ingrese Id a modificar:");
+                    int IdAreas=cs.nextInt();
+                    tox=po.buscarEntidad(IdAreas);
+                    System.out.println("Ingrese Nueva Sigla:");
+                    tox.setSiglas(cs.next());
+                    System.out.println("Ingrese nuevo nombre:");
                     tox.setNombreArea(cs.next());
-                    System.out.println("Ingres Nueva Sigla:");
-                    tox.setSiglas(cs.next());                    
                     po.update(tox);
                     po.listarAreas(po.listarTodo());
                 }
                 case "D" -> {
                     try {
-                        System.out.println("Ingrese el DNI del Registro que desea eliminar:");
-                        po.delete(cs.next());
+                        System.out.println("Ingrese Id que desea eliminar: ");
+                        po.delete(cs.nextInt());
                         po.listarAreas(po.listarTodo());
                     } catch (Exception e) {
                         System.err.println("Error al Eliminar");
@@ -171,7 +171,7 @@ public class AreasDao implements AreasDaoI {
     public void listarAreas(List<AreasTO> lista) {
         System.out.println("IdArea\t\tNombreArea\t\t\tSiglas.");
         for (AreasTO p : lista) {
-            System.out.println(p.getIdArea() + "\t" + p.getNombreArea() + "\t\t\t"
+            System.out.println(p.getIdAreas() + "\t" + p.getNombreArea() + "\t\t\t"
                     + p.getSiglas());
         }
     }
@@ -181,17 +181,17 @@ public class AreasDao implements AreasDaoI {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public AreasTO buscarEntidad(String nombrearea) {
+    @Override
+    public AreasTO buscarEntidad(int id) {
         AreasTO cli = new AreasTO();
-        String sql = "SELECT po.*, n.nombrearea, s.siglas "
-                + "FROM areas po, nombrearea n, siglas s "
-                + "WHERE p.id_area = po.id_area";
+        String sql = "SELECT * FROM areas "
+                + "WHERE id_area =?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, nombrearea);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                cli.setIdArea(rs.getInt("id_area"));
+                cli.setIdAreas(rs.getInt("id_area"));
                 cli.setNombreArea(rs.getString("nombrearea"));
                 cli.setSiglas(rs.getString("siglas"));             
             }
@@ -199,6 +199,35 @@ public class AreasDao implements AreasDaoI {
             System.out.println(e.toString());
         }
         return cli;
+    }
+    
+    
+   
+    @Override
+    public List<ModeloDataAutocomplet> listAutoComplet(String filter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public List<ModeloDataAutocomplet> listAutoCompletCarrera(String filter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ComboBoxOption> listaNombreAreas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<ComboBoxOption> listarSiglas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public int create(AreasDao d) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public int update(AreasDao d) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
