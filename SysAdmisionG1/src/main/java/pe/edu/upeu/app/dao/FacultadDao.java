@@ -35,9 +35,7 @@ public class FacultadDao implements FacultadDaoI {
     public int create(FacultadTO d) {
         int rsId = 0;
         String[] returns = {"id_facultad"};
-        String sql = "INSERT INTO facultad( "
-                + " nombrefacultad) "
-                + " values(?);";
+        String sql = "INSERT INTO facultad(nombrefacultad) values(?) ";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql, returns);         
@@ -124,8 +122,8 @@ public class FacultadDao implements FacultadDaoI {
             switch (opcion) {
                 case "C" -> {
                     FacultadTO tox = new FacultadTO();
-                    System.out.println("Ingrese el ID de la facultad:");
-                    tox.setIdFacultad(cs.nextInt()); 
+                   // System.out.println("Ingrese el ID de la facultad:");
+                   // tox.setIdFacultad(cs.nextInt()); 
                     System.out.println("Ingrese el nombre de la facultad:");
                     tox.setNombreFacultad(cs.next());
                     fa.create(tox);
