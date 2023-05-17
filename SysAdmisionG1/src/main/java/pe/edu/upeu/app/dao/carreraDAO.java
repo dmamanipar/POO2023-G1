@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class carreraDAO {
+public class CarreraDao {
 
     // Cambiar estos valores según tu configuración de base de datos
     private static final String URL = "jdbc:mysql://localhost:3306/mi_basedatos";

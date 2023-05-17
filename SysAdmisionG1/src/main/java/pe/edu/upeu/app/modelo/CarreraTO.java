@@ -9,8 +9,8 @@ import lombok.Data;
 
 @Data
 public class CarreraTO {
-
+  
     public int idCarrera, idFacultad, idAreaExamen;
     public String nombrecarrera;
-
+    
 }
