@@ -7,13 +7,9 @@ package pe.edu.upeu.app.modelo;
 import lombok.Data;
 
 
-/**
- *
- * @author HP
- */
-
 @Data
-public class Resultado_finalTO {
-    public int idresultfinal, idpostulante, idperiodo, idcarrera, idevalpsicologica;
-    public String dni, punto_conocimiento, punto_entrevista;
+public class ResultadoFinalTO {
+    public int idResultfinal, idPostulante, idPeriodo, idCarrera, evalPsicologica;
+    public String dni;
+    public double puntoConocimiento, puntoEntrevista;
 }

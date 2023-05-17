@@ -173,12 +173,12 @@ public class PostulanteDao implements PostulanteDaoI {
                 case "U" -> {
                     PostulanteTO tox;
                     System.out.println("Ingrese el DNI a Modificar:");
-                    String dni=cs.next();
-                    tox=po.buscarEntidad(dni);
+                    String dni = cs.next();
+                    tox = po.buscarEntidad(dni);
                     System.out.println("Ingres Nuevo Nombre:");
                     tox.setNombre(cs.next());
                     System.out.println("Ingres Nuevo A. Paterno:");
-                    tox.setApellidoPat(cs.next());                    
+                    tox.setApellidoPat(cs.next());
                     po.update(tox);
                     po.listarPostulantes(po.listarTodo());
                 }

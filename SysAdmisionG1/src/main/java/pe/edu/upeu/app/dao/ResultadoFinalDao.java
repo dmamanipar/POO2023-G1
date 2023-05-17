@@ -4,7 +4,8 @@ package pe.edu.upeu.app.dao;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pe.edu.upeu.app.dao;
+
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,45 +14,41 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
+
 import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
 import pe.edu.upeu.app.conexion.ConnS;
 import pe.edu.upeu.app.modelo.ComboBoxOption;
-import pe.edu.upeu.app.modelo.Resultado_finalTO;
+import pe.edu.upeu.app.modelo.ResultadoFinalTO;
 import pe.edu.upeu.app.util.ErrorLogger;
 
-/**
- *
- * @author HP
- */
-public class Resultado_finalDao implements Resultado_finalDaoI {
+import java.util.logging.Level;
 
-    ConnS instance=ConnS.getInstance();
-    Connection connection=instance.getConnection();
+public class ResultadoFinalDao implements ResultadoFinalDaoI {
+
+    ConnS instance = ConnS.getInstance();
+    Connection connection = instance.getConnection();
     PreparedStatement ps;
     ResultSet rs;
-    
-    ErrorLogger log=new ErrorLogger(Resultado_finalDao.class.getName());
-    
-    
-   @Override
-    public int create(Resultado_finalTO d) {
+
+    ErrorLogger log = new ErrorLogger(ResultadoFinalDao.class.getName());
+
+    @Override
+    public int create(ResultadoFinalTO d) {
         int rsId = 0;
         String[] returns = {"dni"};
-        String sql = "INSERT INTO postulante(id_result_final, id_postulante, id_periodo, id_carrera, dni, "
+        String sql = "INSERT INTO resultado_final(id_postulante, id_periodo, id_carrera, dni, "
                 + " punto_conocimiento, punto_entrevista, eval_psicologica) "
-                + " values(?, ?, ?, ?, ?, ?, ?, ?);";
+                + " values(?, ?, ?, ?, ?, ?, ?);";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql, returns);
-            ps.setInt(++i, d.getIdResult_final());
             ps.setInt(++i, d.getIdPostulante());
             ps.setInt(++i, d.getIdPeriodo());
             ps.setInt(++i, d.getIdCarrera());
             ps.setString(++i, d.getDni());
-            ps.setString(++i, d.getPunto_conocimiento());
-            ps.setString(++i, d.getPunto_entrevista());
-            ps.setInt(++i, d.getEval_psicologica());
+            ps.setDouble(++i, d.getPuntoConocimiento());
+            ps.setDouble(++i, d.getPuntoEntrevista());
+            ps.setInt(++i, d.getEvalPsicologica());
             rsId = ps.executeUpdate();// 0 no o 1 si commit
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -66,7 +63,7 @@ public class Resultado_finalDao implements Resultado_finalDaoI {
     }
 
     @Override
-    public int update(Resultado_finalTO d) {
+    public int update(ResultadoFinalTO d) {
         System.out.println("actualizar d.getDniruc: " + d.getDni());
         int comit = 0;
         String sql = "UPDATE postulante SET "
@@ -81,13 +78,12 @@ public class Resultado_finalDao implements Resultado_finalDaoI {
         int i = 0;
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(++i, d.getPunto_conocimiento());
-            ps.setString(++i, d.getPunto_entrevista());
-            ps.setInt(++i, d.getIdResult_final());
+            ps.setDouble(++i, d.getPuntoConocimiento());
+            ps.setDouble(++i, d.getPuntoEntrevista());
             ps.setInt(++i, d.getIdPostulante());
             ps.setInt(++i, d.getIdPeriodo());
             ps.setInt(++i, d.getIdCarrera());
-            ps.setInt(++i, d.getEval_psicologica());
+            ps.setInt(++i, d.getEvalPsicologica());
             ps.setString(++i, d.getDni());
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -97,8 +93,8 @@ public class Resultado_finalDao implements Resultado_finalDaoI {
     }
 
     @Override
-    public List<Resultado_finalTO> listarTodo() {
-        List<Resultado_finalTO> listarEntidad = new ArrayList();
+    public List<ResultadoFinalTO> listarTodo() {
+        List<ResultadoFinalTO> listarEntidad = new ArrayList();
         String sql = "SELECT re.*, p.nombre as nombreperiodo, c.nombrecarrera "
                 + "FROM resultado_final re, periodo p, carrera c "
                 + "WHERE p.id_periodo = re.id_periodo and re.id_carrera = c.id_carrera";
@@ -106,11 +102,11 @@ public class Resultado_finalDao implements Resultado_finalDaoI {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Resultado_finalTO cli = new Resultado_finalTO();
+                ResultadoFinalTO cli = new ResultadoFinalTO();
                 cli.setDni(rs.getString("dni"));
-                cli.setPunto_conocimiento(rs.getString("punto_conocimiento"));
-                cli.setPunto_entrevista(rs.getString("punto_entrevista"));
-                cli.setEval_psicologica(rs.getString("eval_psicologica"));
+                cli.setPuntoConocimiento(rs.getInt("punto_conocimiento"));
+                cli.setPuntoEntrevista(rs.getInt("punto_entrevista"));
+                cli.setEvalPsicologica(rs.getInt("eval_psicologica"));
                 cli.setIdCarrera(rs.getInt("id_carrera"));
                 cli.setIdPeriodo(rs.getInt("id_periodo"));
                 cli.setIdPostulante(rs.getInt("id_postulante"));
@@ -124,12 +120,12 @@ public class Resultado_finalDao implements Resultado_finalDaoI {
     }
 
     @Override
-    public int delete(String id) throws Exception {
+    public int delete(int id) throws Exception {
         int comit = 0;
         String sql = "DELETE FROM resultado final WHERE dni = ?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setInt(1, id);
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "delete", ex);
@@ -140,7 +136,7 @@ public class Resultado_finalDao implements Resultado_finalDaoI {
 
     public static void main(String[] args) {
         Scanner cs = new Scanner(System.in);
-        Resultado_finalDao re = new Resultado_finalDao();
+        ResultadoFinalDao re = new ResultadoFinalDao();
 
         int i = 0;
         String opcion = "R";
@@ -148,15 +144,15 @@ public class Resultado_finalDao implements Resultado_finalDaoI {
         do {
             switch (opcion) {
                 case "C" -> {
-                    Resultado_finalTO tox = new Resultado_finalTO();
+                    ResultadoFinalTO tox = new ResultadoFinalTO();
                     System.out.println("Ingrese el DNI:");
                     tox.setDni(cs.next());
                     System.out.println("Ingres el punto conocimiento:");
-                    tox.setPunto_conocimiento(cs.next());
+                    tox.setPuntoConocimiento(cs.nextDouble());
                     System.out.println("Ingres el punto psicologica:");
-                    tox.setPunto_entrevista(cs.next());
+                    tox.setPuntoEntrevista(cs.nextDouble());
                     System.out.println("Ingres el punto psicologica:");
-                    tox.setEval_psicologica(cs.next());
+                    tox.setEvalPsicologica(cs.nextInt());
                     System.out.println("Ingrese Carrera(1=Sistemas, 2=Contabilidad):");
                     tox.setIdCarrera(cs.nextInt());
                     System.out.println("Ingrese el Perido(1=2023-1):");
@@ -164,27 +160,27 @@ public class Resultado_finalDao implements Resultado_finalDaoI {
                     System.out.println("Ingrese el Postulante:");
                     tox.setIdPostulante(cs.nextInt());
                     re.create(tox);
-                    re.listarResultado_final(Listre.listarTodo());
+                    re.listarResultadoFinal(re.listarTodo());
                 }
                 case "R" ->
-                    re.listarResultado_final(re.listarTodo());
+                    re.listarResultadoFinal(re.listarTodo());
                 case "U" -> {
-                    Resultado_finalTO tox;
+                    ResultadoFinalTO tox;
                     System.out.println("Ingrese el DNI a Modificar:");
-                    String dni=cs.next();
-                    tox=re.buscarEntidad(dni);
+                    int dni = cs.nextInt();
+                    tox = re.buscarEntidad(dni);
                     System.out.println("Ingres Nuevo punto conocimiento:");
-                    tox.setPunto_conocimiento(cs.next());
+                    tox.setPuntoConocimiento(cs.nextDouble());
                     System.out.println("Ingres Nuevo punto de entrevista:");
-                    tox.setPunto_entrevista(cs.next());                    
+                    tox.setPuntoEntrevista(cs.nextDouble());
                     re.update(tox);
-                    re.listarResultado_final(re.listarTodo());
+                    re.listarResultadoFinal(re.listarTodo());
                 }
                 case "D" -> {
                     try {
                         System.out.println("Ingrese el DNI del Registro que desea eliminar:");
-                        re.delete(cs.next());
-                        re.listarResultado_final(re.listarTodo());
+                        re.delete(cs.nextInt());
+                        re.listarResultadoFinal(re.listarTodo());
                     } catch (Exception e) {
                         System.err.println("Error al Eliminar");
                     }
@@ -199,35 +195,35 @@ public class Resultado_finalDao implements Resultado_finalDaoI {
         System.out.println("F1:" + (i++));
     }
 
-    public void listarResultado_final(List<Resultado_finalTO> lista) {
+    public void listarResultadoFinal(List<ResultadoFinalTO> lista) {
         System.out.println("DNI\t\t\tPuntos\t\t\tCarrera Post.");
-        for (Resultado_finalTO p : lista) {
+        for (ResultadoFinalTO p : lista) {
             System.out.println(p.getDni() + "\t"
-                    + p.getPuntoConocimiento() + " " + p.getPuntoEntrevista() + "\t\t\t" + p.getCarrera());
+                    + p.getPuntoConocimiento() + " " + p.getPuntoEntrevista() + "\t\t\t" + p.getEvalPsicologica());
         }
     }
 
     @Override
-    public List<Resultado_finalTO> listCmb(String filter) {
+    public List<ResultadoFinalTO> listCmb(String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Resultado_finalTO buscarEntidad(String dni) {
-        Resultado_finalTO cli = new Resultado_finalTO();
+    public ResultadoFinalTO buscarEntidad(int id) {
+        ResultadoFinalTO cli = new ResultadoFinalTO();
         String sql = "SELECT re.*, p.nombre as nombreperiodo, c.nombrecarrera "
                 + "FROM postulante po, periodo p, carrera c "
                 + "WHERE p.id_periodo = re.id_periodo and re.id_carrera = c.id_carrera"
                 + " and re.dni=?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, dni);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
                 cli.setDni(rs.getString("dni"));
-                cli.setPunto_conocimiento(rs.getString("punto_conocimiento"));
-                cli.setPunto_entrevista(rs.getString("punto_entrevista"));
-                cli.setEval_psicologica(rs.getString("eval_psicologica"));
+                cli.setPuntoConocimiento(rs.getInt("punto_conocimiento"));
+                cli.setPuntoEntrevista(rs.getInt("punto_entrevista"));
+                cli.setEvalPsicologica(rs.getInt("eval_psicologica"));
                 cli.setIdCarrera(rs.getInt("id_carrera"));
                 cli.setIdPeriodo(rs.getInt("id_periodo"));
                 cli.setIdPostulante(rs.getInt("id_postulante"));
@@ -263,11 +259,4 @@ public class Resultado_finalDao implements Resultado_finalDaoI {
     public String buscarModalidadExamen(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
-    @Override
-    public List<Resultado_finalTO> ListarTodo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-}
-
 }
