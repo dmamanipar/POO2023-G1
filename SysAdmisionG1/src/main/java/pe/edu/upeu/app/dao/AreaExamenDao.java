@@ -171,9 +171,9 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
     public AreaExamenTO buscarEntidad(int idAreaExamen) {
         AreaExamenTO cli = new AreaExamenTO();
         String sql = "SELECT po.*, p.nombreae"
-                + "FROM AreaExamen, nombreae n, carrera c "
+                + "FROM AreaExamen, nombreae n"
                 + "WHERE p.id_area_examen = po.id_area_examen "
-                + " and po.Nombreae=?";
+                + " and po.nombreae=?";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, idAreaExamen);

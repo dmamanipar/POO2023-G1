@@ -1,0 +1,22 @@
+may. 16, 2023 8:07:52 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreaExamenDao.create
+org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.AreaExamenDao.create(AreaExamenDao.java:45)
+	at pe.edu.upeu.app.dao.AreaExamenDao.main(AreaExamenDao.java:129)
+
+may. 16, 2023 8:09:32 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreaExamenDao.create
+org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.AreaExamenDao.create(AreaExamenDao.java:45)
+	at pe.edu.upeu.app.dao.AreaExamenDao.main(AreaExamenDao.java:129)
+
