@@ -15,7 +15,7 @@ public interface UsuarioDaoI {
     
 public int create(UsuarioTO d);
 public int update(UsuarioTO d);
-public int delete(String id) throws Exception;
+public int delete(int id) throws Exception;
 public List<UsuarioTO> listCmb(String filter);
 public List<UsuarioTO> listarTodo();
 public UsuarioTO buscarEntidad(String user);

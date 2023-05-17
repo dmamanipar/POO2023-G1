@@ -17,11 +17,13 @@ import pe.edu.upeu.app.conexion.ConnS;
 import pe.edu.upeu.app.modelo.ComboBoxOption;
 import pe.edu.upeu.app.modelo.UsuarioTO;
 import pe.edu.upeu.app.util.ErrorLogger;
+
 /**
  *
  * @author Jesus
  */
 public class UsuarioDao implements UsuarioDaoI {
+
     ConnS instance = ConnS.getInstance();
     Connection connection = instance.getConnection();
     PreparedStatement ps;
@@ -33,7 +35,7 @@ public class UsuarioDao implements UsuarioDaoI {
     public int create(UsuarioTO d) {
         int rsId = 0;
         String[] returns = {"user"};
-        String sql = "INSERT INTO usuario(user, clave, estado,perfil "
+        String sql = "INSERT INTO usuario(user, clave, estado, perfil) "
                 + " values(?, ?, ?, ?);";
         int i = 0;
         try {
@@ -59,7 +61,7 @@ public class UsuarioDao implements UsuarioDaoI {
     public int update(UsuarioTO d) {
         System.out.println("actualizar d.getUserruc: " + d.getUser());
         int comit = 0;
-        String sql = "UPDATE postulante SET "
+        String sql = "UPDATE usuario SET "
                 + "user=?, "
                 + "clave=?, "
                 + "estado=?, "
@@ -79,11 +81,26 @@ public class UsuarioDao implements UsuarioDaoI {
     }
 
     @Override
+    public int delete(int id) throws Exception {
+        int comit = 0;
+        String sql = "DELETE FROM usuario WHERE id_usuario=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            comit = ps.executeUpdate();
+        } catch (SQLException ex) {
+            log.log(Level.SEVERE, "delete", ex);
+            throw new Exception("Detalle:" + ex.getMessage());
+        }
+        return comit;
+    }
+
+    @Override
     public List<UsuarioTO> listarTodo() {
         List<UsuarioTO> listarEntidad = new ArrayList();
-        String sql = "SELECT po.*, p.user as user "
-                + "FROM usuario u "
-                + "WHERE p.id_usuario";
+        String sql = "SELECT * "
+                + "FROM usuario  "
+                + "WHERE id_usuario";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -93,28 +110,13 @@ public class UsuarioDao implements UsuarioDaoI {
                 cli.setClave(rs.getString("clave"));
                 cli.setEstado(rs.getString("estado"));
                 cli.setPerfil(rs.getString("perfil"));
-                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
+                cli.setIdUsuario(rs.getInt("id_usuario"));
                 listarEntidad.add(cli);
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
         return listarEntidad;
-    }
-
-    @Override
-    public int delete(String id) throws Exception {
-        int comit = 0;
-        String sql = "DELETE FROM usuario WHERE user = ?";
-        try {
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
-            comit = ps.executeUpdate();
-        } catch (SQLException ex) {
-            log.log(Level.SEVERE, "delete", ex);
-            throw new Exception("Detalle:" + ex.getMessage());
-        }
-        return comit;
     }
 
     public static void main(String[] args) {
@@ -143,20 +145,20 @@ public class UsuarioDao implements UsuarioDaoI {
                     po.listarPostulantes(po.listarTodo());
                 case "U" -> {
                     UsuarioTO tox;
-                    System.out.println("Ingrese el Usuario a Modificar:");
-                    String user=cs.next();
-                    tox=po.buscarEntidad(user);
+                    System.out.println("Ingrese el ID USUARIO a Modificar:");
+                    String user = cs.next();
+                    tox = po.buscarEntidad(user);
                     System.out.println("Ingres Nuevo Nombre:");
                     tox.setClave(cs.next());
                     System.out.println("Ingres Nuevo A. Paterno:");
-                    tox.setPerfil(cs.next());                    
+                    tox.setPerfil(cs.next());
                     po.update(tox);
                     po.listarPostulantes(po.listarTodo());
                 }
                 case "D" -> {
                     try {
-                        System.out.println("Ingrese el USER del Registro que desea eliminar:");
-                        po.delete(cs.next());
+                        System.out.println("Ingrese el ID USUARIO del Registro que desea eliminar:");
+                        po.delete(cs.nextInt());
                         po.listarPostulantes(po.listarTodo());
                     } catch (Exception e) {
                         System.err.println("Error al Eliminar");
@@ -173,10 +175,10 @@ public class UsuarioDao implements UsuarioDaoI {
     }
 
     public void listarPostulantes(List<UsuarioTO> lista) {
-        System.out.println("USUARIO\t\tCLAVE\t\t\tESTADO\t\t\tPERFIL");
+        System.out.println("USUARIO\t\tCLAVE\t\t\tESTADO\t\t\tPERFIL\t\tID_USUARIO");
         for (UsuarioTO p : lista) {
-            System.out.println(p.getUser() + "\t" + p.getClave() + "\t\t\t"
-                    + p.getEstado() + "\t\t\t" + p.getPerfil());
+            System.out.println(p.getUser() + "\t\t" + p.getClave() + "\t\t\t"
+                    + p.getEstado() + "\t\t\t" + p.getPerfil() + "\t\t\t" + p.getIdUsuario());
         }
     }
 
@@ -188,9 +190,9 @@ public class UsuarioDao implements UsuarioDaoI {
     @Override
     public UsuarioTO buscarEntidad(String user) {
         UsuarioTO cli = new UsuarioTO();
-        String sql = "SELECT po.*, p.user as user "
-                + "FROM usuario u "
-                + "WHERE p.id_usuario";
+        String sql = "SELECT  * "
+                + "FROM usuario "
+                + "WHERE id_usuario";
         try {
             ps = connection.prepareStatement(sql);
             ps.setString(1, user);
@@ -200,7 +202,7 @@ public class UsuarioDao implements UsuarioDaoI {
                 cli.setClave(rs.getString("clave"));
                 cli.setEstado(rs.getString("estado"));
                 cli.setPerfil(rs.getString("perfil"));
-                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));               
+                cli.setIdUsuario(rs.getInt("id_usuario"));
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -233,5 +235,3 @@ public class UsuarioDao implements UsuarioDaoI {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
-
-

@@ -15,5 +15,5 @@ public class UsuarioTO {
     
     public int idUsuario;
     public String user, clave, estado, perfil;
-    
+      
 }
