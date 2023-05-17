@@ -98,14 +98,14 @@ public class PostulanteDao implements PostulanteDaoI {
     public List<PostulanteTO> listarTodo() {
         List<PostulanteTO> listarEntidad = new ArrayList();
         String sql = "SELECT po.*, p.nombre as nombreperiodo, c.nombrecarrera "
-                + "FROM postulante po, periodo p, carrera c "
-                + "WHERE p.id_periodo = po.id_periodo and po.id_carrera = c.id_carrera";
+                + "FROM area_periodo_result po, area_periodo p, area_examen c "
+                + "WHERE p.id_periodo = po.id_periodo and po.id_examen = c.id_carrera";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 PostulanteTO cli = new PostulanteTO();
-                cli.setDni(rs.getString("dni"));
+                cli.setDni(rs.getString("ida"));
                 cli.setNombre(rs.getString("nombre"));
                 cli.setApellidoPat(rs.getString("apellido_pat"));
                 cli.setApellidoMat(rs.getString("apellido_mat"));

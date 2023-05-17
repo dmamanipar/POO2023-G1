@@ -19,10 +19,10 @@ import pe.edu.upeu.app.modelo.AreaPeriodoResultTO;
 public interface AreaPeriodoResultDaoI {
 public int create(AreaPeriodoResultTO d);
 public int update(AreaPeriodoResultTO d);
-public int delete(String id) throws Exception;
+public int delete(int id) throws Exception;
 public List<AreaPeriodoResultTO> listCmb(String filter);
 public List<AreaPeriodoResultTO> listarTodo();
-public AreaPeriodoResultTO buscarEntidad(String IdAreaPeriodo);
+public AreaPeriodoResultTO buscarEntidad(int idAreaPeriodo);
 public List<ModeloDataAutocomplet> listAutoComplet(String filter); 
 public List<ComboBoxOption> listaModalidadExamen();
 public List<ComboBoxOption> listarPeriodo();

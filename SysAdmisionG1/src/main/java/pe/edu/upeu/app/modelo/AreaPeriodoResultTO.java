@@ -4,44 +4,19 @@
  */
 package pe.edu.upeu.app.modelo;
 
+import lombok.Data;
+
 /**
  *
  * @author HP
  */
+@Data
 public class AreaPeriodoResultTO {
     
-    public int idAreaPeriodoResult,IdAreaPeriodo,idAreaExamen;
-    public double Porcentaje;
-    //public String PorcentajeAreaPeriodoResult,PorcentajeAreaExamen;
-
-    public void setPorcentaje(double nextDouble) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void setIdAreaExamen(int nextInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void setIdAreaPeriodo(int nextInt) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public int getIdAreaPeriodo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public int getIdAreaExamen() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public double getPorcentaje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public int idAreaPeriodoResult,idAreaPeriodo,idAreaExamen;
+    public double porcentaje;
+    //FOREING KEY
+    public String nombreIdAreaPeriodo, nombreIdAreaExamen;
 
 
-    
-    
-    
-    
-    
 }
