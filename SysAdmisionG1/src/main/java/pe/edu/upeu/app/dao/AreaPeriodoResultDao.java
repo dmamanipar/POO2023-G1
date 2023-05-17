@@ -65,14 +65,15 @@ public class AreaPeriodoResultDao implements AreaPeriodoResultDaoI {
         String sql = "UPDATE area_periodo_result SET "
                 + "id_area_periodo=?, "
                 + "id_area_examen=?, "
-                + "porcentaje=?, ";
-                //+ "WHERE id_area_periodo=?"
+                + "porcentaje=? "
+                + "WHERE id_area_periodo_result=?";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(++i, d.getIdAreaPeriodo());
             ps.setInt(++i, d.getIdAreaExamen());
             ps.setDouble(++i, d.getPorcentaje());
+            ps.setInt(++i, d.getIdAreaPeriodoResult());
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "update", ex);
@@ -83,10 +84,9 @@ public class AreaPeriodoResultDao implements AreaPeriodoResultDaoI {
     @Override
     public List<AreaPeriodoResultTO> listarTodo() {
         List<AreaPeriodoResultTO> listarEntidad = new ArrayList();
-        String sql = "SELECT po.*, p.id_area_periodo as nombreidareaperiodo, c.nonmbreidareaexamen "
+        String sql = "SELECT po.*, p.id_periodo as nombreidareaperiodo, c.nombreae "
                 + "FROM area_periodo_result po, area_periodo p, area_examen c "
-                + "WHERE p.id_area_periodo = po.id_area_periodo and po.id_area_examen = c.id_area_examen"
-                + " and po.porcentaje=?";
+                + "WHERE p.id_area_periodo = po.id_area_periodo and po.id_area_examen = c.id_area_examen";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -95,7 +95,9 @@ public class AreaPeriodoResultDao implements AreaPeriodoResultDaoI {
                 cli.setIdAreaPeriodo(rs.getInt("id_area_periodo"));
                 cli.setIdAreaExamen(rs.getInt("id_area_examen"));
                 cli.setPorcentaje(rs.getDouble("porcentaje"));
-                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
+                cli.setIdAreaPeriodoResult(rs.getInt("id_area_periodo_result"));
+                cli.setNombreIdAreaPeriodo(rs.getString("nombreidareaperiodo"));
+                cli.setNombreIdAreaExamen(rs.getString("nombreae"));
                 listarEntidad.add(cli);
             }
         } catch (SQLException e) {
@@ -107,7 +109,7 @@ public class AreaPeriodoResultDao implements AreaPeriodoResultDaoI {
     @Override
     public int delete(int id) throws Exception {
         int comit = 0;
-        String sql = "DELETE FROM area_periodo_result WHERE id_area_periodo = ?";
+        String sql = "DELETE FROM area_periodo_result WHERE id_area_periodo_result = ?";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
@@ -136,7 +138,7 @@ public class AreaPeriodoResultDao implements AreaPeriodoResultDaoI {
                     tox.setIdAreaExamen(cs.nextInt());
                     System.out.println("Ingres porcentaje:");
                     tox.setPorcentaje(cs.nextDouble());
-                            
+                    po.create(tox);
                     po.listarPostulantes(po.listarTodo());
                 }
                 case "R" ->
@@ -148,7 +150,7 @@ public class AreaPeriodoResultDao implements AreaPeriodoResultDaoI {
                     tox=po.buscarEntidad(idAreaPeriodo);
                     System.out.println("Ingres Nuevo Id area periodo:");
                     tox.setIdAreaPeriodo(cs.nextInt());
-                    System.out.println("Ingres Nuevo Id area examen:");
+                    System.out.println("Ingres Porcentaje:");
                     tox.setPorcentaje(cs.nextInt());                    
                     po.update(tox);
                     po.listarPostulantes(po.listarTodo());
@@ -188,10 +190,10 @@ public class AreaPeriodoResultDao implements AreaPeriodoResultDaoI {
     @Override
     public AreaPeriodoResultTO buscarEntidad(int idAreaPeriodo) {
         AreaPeriodoResultTO cli = new AreaPeriodoResultTO();
-        String sql = "SELECT po.*, p.id_area_periodo as nombreidareaperiodo, c.nombreidareaexamen "
+        String sql = "SELECT po.*, p.id_periodo as nombreidareaperiodo, c.nombreae "
                 + "FROM area_periodo_result po, area_periodo p, area_examen c "
                 + "WHERE p.id_area_periodo = po.id_area_periodo and po.id_area_examen = c.id_area_examen"
-                + " and po.porcentaje=?";
+                + " and po.id_area_periodo_result=?";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, idAreaPeriodo);
@@ -199,8 +201,10 @@ public class AreaPeriodoResultDao implements AreaPeriodoResultDaoI {
             if (rs.next()) {
                 cli.setIdAreaPeriodo(rs.getInt("id_area_periodo"));
                 cli.setIdAreaExamen(rs.getInt("id_area_examen"));
-                cli.setPorcentaje(rs.getDouble("porcentaje"));;
-                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));               
+                cli.setPorcentaje(rs.getDouble("porcentaje"));
+                cli.setIdAreaPeriodoResult(rs.getInt("id_area_periodo_result"));
+                cli.setNombreIdAreaPeriodo(rs.getString("nombreidareaperiodo"));
+                cli.setNombreIdAreaExamen(rs.getString("nombreae"));             
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
