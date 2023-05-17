@@ -14,14 +14,26 @@ import pe.edu.upeu.app.modelo.PreguntasTO;
  * @author acer
  */
 public interface PreguntasDaoI {
+
     public int create(PreguntasTO d);
-public int update(PreguntasTO d);
-public int delete(String id) throws Exception;
-public List<PreguntasTO> listCmb(String filter);
-public List<PreguntasTO> listarTodo();
-public List<ModeloDataAutocomplet> listAutoComplet(String filter); 
-public List<ComboBoxOption> listaModalidadExamen();
-public List<ComboBoxOption> listarPeriodo();
-public List<ModeloDataAutocomplet> listAutoCompletCarrera(String filter);
-public String buscarModalidadExamen(String id);
+
+    public int update(PreguntasTO d);
+
+    public int delete(int id) throws Exception;
+    
+    public PreguntasTO buscarEntidad(int id_pregunta);
+
+    public List<PreguntasTO> listarTodo();
+
+    public List<PreguntasTO> listCmb(String filter);
+
+    public List<ModeloDataAutocomplet> listAutoComplet(String filter);
+
+    public List<ComboBoxOption> listaModalidadExamen();
+
+    public List<ComboBoxOption> listarPeriodo();
+
+    public List<ModeloDataAutocomplet> listAutoCompletCarrera(String filter);
+
+    public String buscarModalidadExamen(String id);
 }
