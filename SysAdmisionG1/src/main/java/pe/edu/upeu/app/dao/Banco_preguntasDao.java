@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.logging.Level;
 import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
 import pe.edu.upeu.app.conexion.ConnS;
@@ -42,7 +41,7 @@ public class Banco_preguntasDao {
             ps.setString(++i, d.getResultado());
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
-            log.log(Level.SEVERE, "update", ex);
+            ErrorLogger.log(Level.SEVERE, "update", ex);
         }
         return comit;
     }
@@ -95,27 +94,22 @@ BancopreguntasTO cli = new BancopreguntasTO();
         return cli;
     }
 
-    @Override
     public List<ModeloDataAutocomplet> listAutoComplet(String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public List<ComboBoxOption> listaModalidadExamen() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public List<ComboBoxOption> listarPeriodo() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public List<ModeloDataAutocomplet> listAutoCompletCarrera(String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public String buscarModalidadExamen(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
