@@ -13,7 +13,8 @@ import lombok.Data;
  */
 
 @Data
-public class Resultado_finalTO {
-    public int idresultfinal, idpostulante, idperiodo, idcarrera, idevalpsicologica;
-    public String dni, punto_conocimiento, punto_entrevista;
+public class ResultadoFinalTO {
+    public int idResultfinal, idPostulante, idPeriodo, idCarrera, evalPsicologica;
+    public String dni;
+    double puntoConocimiento, puntoEntrevista;
 }
