@@ -165,6 +165,7 @@ public class PostulanteDao implements PostulanteDaoI {
                     tox.setIdPeriodo(cs.nextInt());
                     System.out.println("Ingrese Carrera(1=Sistemas, 2=Contabilidad):");
                     tox.setIdCarrera(cs.nextInt());
+                    
                     po.create(tox);
                     po.listarPostulantes(po.listarTodo());
                 }

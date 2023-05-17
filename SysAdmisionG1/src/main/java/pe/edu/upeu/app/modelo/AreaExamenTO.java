@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class AreaExamenTO {
     public int idAreaExamen;
-    public String Nombreae;
+    public String nombreae;
    
 
   

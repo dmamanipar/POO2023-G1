@@ -11,8 +11,8 @@ public interface AreaExamenDaoI {
 
     public int create(AreaExamenTO d);
     public int update(AreaExamenTO d);
-    public int delete(String id) throws Exception;
+    public int delete(int idAreaExamen) throws Exception;
     public List<AreaExamenTO> listarTodo();
-    public AreaExamenTO buscarEntidad(String dni);
+    public AreaExamenTO buscarEntidad(int idAreaExamen);
    
 }

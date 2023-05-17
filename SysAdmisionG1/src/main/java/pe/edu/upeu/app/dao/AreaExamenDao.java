@@ -33,13 +33,13 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
     @Override
     public int create(AreaExamenTO d) {
         int rsId = 0;
-        String[] returns = {"Id_AreaExamen"};
-        String sql = "INSERT INTO areas(Id_AreaExamen, Nombreae)"
-            + " values(?, ?, ?);";
+        String[] returns = {"id_area_examen"};
+        String sql = "INSERT INTO area_examen(nombreae)"
+            + " values(?);";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql, returns);
-            ps.setInt(++i, d.getIdAreaExamen());
+           // ps.setInt(++i, d.getIdAreaExamen());
             ps.setString(++i, d.getNombreae());
            
             rsId = ps.executeUpdate();
@@ -78,10 +78,7 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
     @Override
     public List<AreaExamenTO> listarTodo() {
         List<AreaExamenTO> listarEntidad = new ArrayList();
-        String sql = "SELECT po.*, p.nombreae "
-            + "FROM areas po "
-            + "INNER JOIN p ON p.Id_AreaExamen = po.Id_AreaExamen "
-            + "WHERE po.nombreae = ?";
+        String sql = "SELECT * from area_examen";
         
         try {
             ps = connection.prepareStatement(sql);
@@ -89,7 +86,7 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
             while (rs.next()) {
                 AreaExamenTO cli = new AreaExamenTO();
                 cli.setNombreae(rs.getString("nombreae"));
-                cli.setIdAreaExamen(rs.getInt("id_AreaExamen"));
+                cli.setIdAreaExamen(rs.getInt("id_area_examen"));
                 
                 listarEntidad.add(cli);
             }
@@ -100,12 +97,12 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
     }
 
     @Override
-    public int delete(String id) throws Exception {
+    public int delete(int id) throws Exception {
         int comit = 0;
         String sql = "DELETE FROM areas WHERE IdArea = ?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setInt(1, id);
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             ErrorLogger.log(Level.SEVERE, "delete", ex);
@@ -126,8 +123,8 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
                     AreaExamenTO tox = new AreaExamenTO();
                     System.out.println("Ingrese Nombre:");
                     tox.setNombreae(cs.next());
-                    System.out.println("Ingres Area:");
-                    tox.setIdAreaExamen(cs.nextInt());
+                    //System.out.println("Ingres Area:");
+                    //tox.setIdAreaExamen(cs.nextInt());
                     
                     po.create(tox);
                     po.listarAreas(po.listarTodo());
@@ -137,17 +134,17 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
                 case "U" -> {
                     AreaExamenTO tox;
                     System.out.println("Ingrese el Nombre a Modificar:");
-                    String Nombreae=cs.next();
-                    tox=po.buscarEntidad(Nombreae);
-                    System.out.println("Ingres Nuevo Nombre:");
+                    int areaExamen=cs.nextInt();
+                    tox=po.buscarEntidad(areaExamen);
+                    System.out.println("IngreseNuevo Nombre:");
                     tox.setNombreae(cs.next());                   
                     po.update(tox);
                     po.listarAreas(po.listarTodo());
                 }
                 case "D" -> {
                     try {
-                        System.out.println("Ingrese el Nombre del Registro que desea eliminar:");
-                        po.delete(cs.next());
+                        System.out.println("Ingrese el Nombre del Registro que desea eliminar:");               
+                        po.delete(cs.nextInt());
                         po.listarAreas(po.listarTodo());
                     } catch (Exception e) {
                         System.err.println("Error al Eliminar");
@@ -171,18 +168,18 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
     }
 
     @Override
-    public AreaExamenTO buscarEntidad(String IdAreaExamen) {
+    public AreaExamenTO buscarEntidad(int idAreaExamen) {
         AreaExamenTO cli = new AreaExamenTO();
         String sql = "SELECT po.*, p.nombreae"
                 + "FROM AreaExamen, nombreae n, carrera c "
-                + "WHERE p.id_AreaExamen = po.id_AreaExamen "
+                + "WHERE p.id_area_examen = po.id_area_examen "
                 + " and po.Nombreae=?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, IdAreaExamen);
+            ps.setInt(1, idAreaExamen);
             rs = ps.executeQuery();
             if (rs.next()) {
-                cli.setNombreae(rs.getString("Id_AreaExamen"));
+                cli.setNombreae(rs.getString("id_area_examen"));
              
                          
             }
