@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 may 16, 2023 7:13:47 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.ResultadoFinalDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "punto_conocimiento": syntax error)
@@ -7,6 +8,33 @@ may. 16, 2023 3:22:02 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.AreaPeriodoDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "WHERE": syntax error)
 >>>>>>> dev9
+=======
+may. 16, 2023 3:22:29 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.BancoPreguntasDao.create
+org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_FOREIGNKEY] A foreign key constraint failed (FOREIGN KEY constraint failed)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.BancoPreguntasDao.create(BancoPreguntasDao.java:47)
+	at pe.edu.upeu.app.dao.BancoPreguntasDao.main(BancoPreguntasDao.java:111)
+
+may. 16, 2023 3:38:41 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.BancoPreguntasDao.create
+org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_FOREIGNKEY] A foreign key constraint failed (FOREIGN KEY constraint failed)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.BancoPreguntasDao.create(BancoPreguntasDao.java:47)
+	at pe.edu.upeu.app.dao.BancoPreguntasDao.main(BancoPreguntasDao.java:112)
+
+may. 16, 2023 4:23:48 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.BancoPreguntasDao.create
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (table banco_preguntas has no column named nobrearea)
+>>>>>>> dev16
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.throwex(DB.java:1112)
@@ -20,10 +48,53 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
 <<<<<<< HEAD
+<<<<<<< HEAD
 	at pe.edu.upeu.app.dao.ResultadoFinalDao.update(ResultadoFinalDao.java:79)
 	at pe.edu.upeu.app.dao.ResultadoFinalDao.main(ResultadoFinalDao.java:179)
 =======
 	at pe.edu.upeu.app.dao.AreaPeriodoDao.update(AreaPeriodoDao.java:67)
 	at pe.edu.upeu.app.dao.AreaPeriodoDao.main(AreaPeriodoDao.java:129)
 >>>>>>> dev9
+=======
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:150)
+	at pe.edu.upeu.app.dao.BancoPreguntasDao.create(BancoPreguntasDao.java:42)
+	at pe.edu.upeu.app.dao.BancoPreguntasDao.main(BancoPreguntasDao.java:113)
+
+may. 16, 2023 4:25:50 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.BancoPreguntasDao.create
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near ")": syntax error)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.throwex(DB.java:1112)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:117)
+	at org.sqlite.core.DB.prepare(DB.java:267)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:44)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:25)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:150)
+	at pe.edu.upeu.app.dao.BancoPreguntasDao.create(BancoPreguntasDao.java:42)
+	at pe.edu.upeu.app.dao.BancoPreguntasDao.main(BancoPreguntasDao.java:113)
+
+may. 16, 2023 4:42:10 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.BancoPreguntasDao.update
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: nombrearea)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.throwex(DB.java:1112)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:117)
+	at org.sqlite.core.DB.prepare(DB.java:267)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:44)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:25)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+	at pe.edu.upeu.app.dao.BancoPreguntasDao.update(BancoPreguntasDao.java:71)
+	at pe.edu.upeu.app.dao.BancoPreguntasDao.main(BancoPreguntasDao.java:128)
+>>>>>>> dev16
 
