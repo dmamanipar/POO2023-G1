@@ -22,4 +22,6 @@ public interface PeriodoDaoI {
 
 public List<PostulanteTO> listarTodo();
 
+public PostulanteTO buscarEntidad(String nombre);
+
 }

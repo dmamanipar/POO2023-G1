@@ -62,7 +62,7 @@ public class MsgBox {
     }
 
     public static void main(String[] args) {
-        MsgBox msgBox = new MsgBox("Mensaje", JOptionPane.ERROR_MESSAGE,
-                "img/secrecy-icon.png");
+        MsgBox msgBox = new MsgBox("hola", JOptionPane.ERROR_MESSAGE,
+                "img/add-contact-icon.png");
     }
 }
