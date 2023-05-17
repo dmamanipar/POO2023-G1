@@ -15,26 +15,7 @@ public class FacultadTO {
     public int idFacultad;
     public String nombreFacultad;
     
-    public int getIdFacultad() {
-        return idFacultad;
-    }
-
-    public void setIdFacultad(int idFacultad) {
-        this.idFacultad = idFacultad;
-    }
-
-    public String getNombreFacultad() {
-        return nombreFacultad;
-    }
-
-    public void setNombreFacultad(String nombrefacultad) {
-        this.nombreFacultad = nombrefacultad;
-    }
-
-    @Override
-    public String toString() {
-        return nombreFacultad;
-    }
+ 
     
     
 }

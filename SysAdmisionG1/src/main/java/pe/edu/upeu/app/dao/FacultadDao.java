@@ -34,14 +34,14 @@ public class FacultadDao implements FacultadDaoI {
     @Override
     public int create(FacultadTO d) {
         int rsId = 0;
-        String[] returns = {"dni"};
-        String sql = "INSERT INTO facultad(id_facultad, "
-                + " nombreFacultad) "
-                + " values(?, ?);";
+        String[] returns = {"id_facultad"};
+        String sql = "INSERT INTO facultad( "
+                + " nombrefacultad) "
+                + " values(?);";
         int i = 0;
         try {
-            ps = connection.prepareStatement(sql, returns);
-            ps.setInt(++i, d.getIdFacultad());
+            ps = connection.prepareStatement(sql, returns);         
+            
             ps.setString(++i, d.getNombreFacultad());
             rsId = ps.executeUpdate();// 0 no o 1 si commit
             try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -58,20 +58,18 @@ public class FacultadDao implements FacultadDaoI {
 
     @Override
     public int update(FacultadTO d) {
-        System.out.println("actualizar d.getDniruc: " + d.getIdFacultad());
+        System.out.println("actualizar d.getIdFacultad: " + d.getIdFacultad());
         int comit = 0;
         String sql = "UPDATE facultad SET "
-                + "nombreFacultad=?, "
-                + "id_periodo=?, "
-                + "id_carrera=? "
-                + "WHERE dni=?";
+                + "nombrefacultad=? "
+                
+                + "WHERE id_facultad=?";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql);
             ps.setString(++i, d.getNombreFacultad());
-            ps.setInt(++i, d.getIdFacultad());
-            /*ps.setInt(++i, d.getIdCarrera());
-            ps.setString(++i, d.getDni());*/
+            /*ps.setInt(++i, d.getIdFacultad());*/
+   
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "update", ex);
@@ -82,15 +80,14 @@ public class FacultadDao implements FacultadDaoI {
     @Override
     public List<FacultadTO> listarTodo() {
         List<FacultadTO> listarEntidad = new ArrayList();
-        String sql = "SELECT po.*, p.nombre as nombrefacultad "
-                + "FROM facultad po "
-                + "WHERE p.id_facultad = po.id_facultad";
+        String sql = "SELECT * "
+                + "FROM facultad ";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 FacultadTO cli = new FacultadTO();
-
+                cli.setIdFacultad(rs.getInt("id_facultad"));
                 cli.setNombreFacultad(rs.getString("nombrefacultad"));
                 //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
                 listarEntidad.add(cli);
@@ -102,12 +99,12 @@ public class FacultadDao implements FacultadDaoI {
     }
 
     @Override
-    public int delete(String id) throws Exception {
+    public int delete(int id) throws Exception {
         int comit = 0;
-        String sql = "DELETE FROM postulante WHERE dni = ?";
+        String sql = "DELETE FROM facultad WHERE id_facultad = ?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setInt(1, id);
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "delete", ex);
@@ -139,9 +136,9 @@ public class FacultadDao implements FacultadDaoI {
                 case "U" -> {
                     FacultadTO tox;
                     System.out.println("Ingrese el ID a Modificar:");
-                    String dni = cs.next();
-                    tox = fa.buscarEntidad(dni);
-                    System.out.println("Ingres Nu evo Nombre:");
+                    int id =cs.nextInt();
+                    tox = fa.buscarEntidad(id);
+                    System.out.println("Ingres Nuevo Nombre:");
                     tox.setNombreFacultad(cs.next());
 
                     fa.update(tox);
@@ -150,7 +147,7 @@ public class FacultadDao implements FacultadDaoI {
                 case "D" -> {
                     try {
                         System.out.println("Ingrese el ID del Registro que desea eliminar:");
-                        fa.delete(cs.next());
+                        fa.delete(cs.nextInt());
                         fa.listarFacultad(fa.listarTodo());
                     } catch (Exception e) {
                         System.err.println("Error al Eliminar");
@@ -169,7 +166,7 @@ public class FacultadDao implements FacultadDaoI {
     public void listarFacultad(List<FacultadTO> lista) {
         System.out.println("ID\t\tNombre Facultad\t\t\t");
         for (FacultadTO p : lista) {
-            System.out.println(p.getIdFacultad() + "\t" + p.getNombreFacultad() + "\t");
+            System.out.println(p.getIdFacultad() + "\t\t" + p.getNombreFacultad() + "\t");
         }
     }
 
@@ -179,27 +176,27 @@ public class FacultadDao implements FacultadDaoI {
     }
 
     @Override
-    public FacultadTO buscarEntidad(String dni) {
+    public FacultadTO buscarEntidad(int id) {
         FacultadTO cli = new FacultadTO();
-        String sql = "SELECT po.*, p.nombre as nombreperiodo, c.nombrecarrera "
-                + "FROM postulante po, periodo p, carrera c "
-                + "WHERE p.id_periodo = po.id_periodo and po.id_carrera = c.id_carrera"
-                + " and po.dni=?";
+        String sql = "SELECT * "
+                + "FROM facultad "
+                + "WHERE id_facultad=?";
         try {
+            
             ps = connection.prepareStatement(sql);
-            ps.setString(1, dni);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()) {
-                cli.setNombreFacultad(rs.getString("nombreperiodo"));
-                /* cli.setNombreCarrera(rs.getString("nombrecarrera"));
-                /*cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));  */
+                cli.setNombreFacultad(rs.getString("nombrefacultad"));
+                cli.setIdFacultad(rs.getInt("id_facultad"));
+                
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
         return cli;
     }
-    
+      
     public List<ModeloDataAutocomplet> listAutoComplet(String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

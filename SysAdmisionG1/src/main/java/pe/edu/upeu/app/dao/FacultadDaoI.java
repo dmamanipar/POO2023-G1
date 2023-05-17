@@ -17,10 +17,10 @@ public interface FacultadDaoI {
     
     public int create(FacultadTO d);
 public int update(FacultadTO d);
-public int delete(String id) throws Exception;
+public int delete(int id) throws Exception;
 public List<FacultadTO> listCmb(String filter);
 public List<FacultadTO> listarTodo();
-public FacultadTO buscarEntidad(String dni);
+public FacultadTO buscarEntidad(int id);
 /*public List<ModeloDataAutocomplet> listAutoComplet(String filter); 
 public List<ComboBoxOption> listaModalidadExamen();
 public List<ComboBoxOption> listarPeriodo();
