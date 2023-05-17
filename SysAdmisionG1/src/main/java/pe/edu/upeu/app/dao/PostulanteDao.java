@@ -24,12 +24,12 @@ import pe.edu.upeu.app.util.ErrorLogger;
  */
 public class PostulanteDao implements PostulanteDaoI {
 
-    ConnS instance = ConnS.getInstance();
-    Connection connection = instance.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
+        ConnS instance = ConnS.getInstance();
+        Connection connection = instance.getConnection();
+        PreparedStatement ps;
+        ResultSet rs;
 
-    ErrorLogger log = new ErrorLogger(PostulanteDao.class.getName());
+        ErrorLogger log = new ErrorLogger(PostulanteDao.class.getName());
 
     @Override
     public int create(PostulanteTO d) {
@@ -53,7 +53,7 @@ public class PostulanteDao implements PostulanteDaoI {
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
                     rsId = rs.getInt(1);
-                }
+                }   
                 rs.close();
             }
         } catch (SQLException ex) {
@@ -143,7 +143,7 @@ public class PostulanteDao implements PostulanteDaoI {
         PostulanteDao po = new PostulanteDao();
 
         int i = 0;
-        String opcion = "R";
+        String opcion = "R";        
         String mensajeOpciones = "Menu de Opciones\nR=Reportar\nC=Crear\nU=Update\nD=Delete\nX=Salir";
         do {
             switch (opcion) {
