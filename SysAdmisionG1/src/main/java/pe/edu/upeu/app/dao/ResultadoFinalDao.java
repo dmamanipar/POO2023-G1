@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
-import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
+
 import pe.edu.upeu.app.conexion.ConnS;
-import pe.edu.upeu.app.modelo.ComboBoxOption;
+
 import pe.edu.upeu.app.modelo.ResultadoFinalTO;
 import pe.edu.upeu.app.util.ErrorLogger;
 
@@ -145,8 +145,8 @@ public class ResultadoFinalDao implements ResultadoFinalDaoI {
             switch (opcion) {
                 case "C" -> {
                     ResultadoFinalTO tox = new ResultadoFinalTO();
-                    System.out.println("Ingrese el resultado final:");
-                    tox.setIdResultfinal(cs.nextInt());
+                    //System.out.println("Ingrese el resultado final:");
+                    //tox.setIdResultfinal(cs.nextInt());
                     System.out.println("Ingrese el Postulante:");
                     tox.setIdPostulante(cs.nextInt());
                     System.out.println("Ingrese el Perido(1=2023-1):");
