@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 may. 16, 2023 4:25:30 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.AreaPeriodoDao.update
 org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
@@ -24,6 +25,29 @@ org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database 
 may. 16, 2023 5:55:16 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.AreaExamenDao.create
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (table areas has no column named Id_AreaExamen)
+=======
+may. 16, 2023 3:19:23 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.delete
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: idareas)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.throwex(DB.java:1112)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:117)
+	at org.sqlite.core.DB.prepare(DB.java:267)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:44)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:25)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+	at pe.edu.upeu.app.dao.AreasDao.delete(AreasDao.java:108)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:155)
+
+may. 16, 2023 4:44:29 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.create
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near ")": syntax error)
+>>>>>>> Dev3
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.throwex(DB.java:1112)
@@ -37,7 +61,88 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (table 
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:150)
+<<<<<<< HEAD
 	at pe.edu.upeu.app.dao.AreaExamenDao.create(AreaExamenDao.java:41)
 	at pe.edu.upeu.app.dao.AreaExamenDao.main(AreaExamenDao.java:132)
 >>>>>>> dev6
+=======
+	at pe.edu.upeu.app.dao.AreasDao.create(AreasDao.java:43)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:134)
+
+may. 16, 2023 5:34:56 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.delete
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: idareas)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.throwex(DB.java:1112)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:117)
+	at org.sqlite.core.DB.prepare(DB.java:267)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:44)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:25)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+	at pe.edu.upeu.app.dao.AreasDao.delete(AreasDao.java:107)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:154)
+
+may. 16, 2023 5:44:53 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.delete
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: id_areas)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.throwex(DB.java:1112)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:117)
+	at org.sqlite.core.DB.prepare(DB.java:267)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:44)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:25)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+	at pe.edu.upeu.app.dao.AreasDao.delete(AreasDao.java:107)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:154)
+
+may. 16, 2023 6:22:23 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.update
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (incomplete input)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.throwex(DB.java:1112)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:117)
+	at org.sqlite.core.DB.prepare(DB.java:267)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:44)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:25)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+	at pe.edu.upeu.app.dao.AreasDao.update(AreasDao.java:71)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:146)
+
+may. 16, 2023 6:44:54 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.delete
+org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.AreasDao.delete(AreasDao.java:109)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:154)
+
+may. 16, 2023 6:45:29 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.delete
+org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.AreasDao.delete(AreasDao.java:109)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:154)
+>>>>>>> Dev3
 

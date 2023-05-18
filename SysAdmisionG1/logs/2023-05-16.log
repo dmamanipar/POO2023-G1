@@ -3,6 +3,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 may 16, 2023 7:13:47 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.ResultadoFinalDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "punto_conocimiento": syntax error)
@@ -18,6 +19,10 @@ SEVERE: pe.edu.upeu.app.dao.BancoPreguntasDao.create
 may. 16, 2023 7:11:01 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.PreguntasDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "id_area_periodo": syntax error)
+=======
+may. 16, 2023 6:08:59 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.update
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (incomplete input)
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.throwex(DB.java:1112)
@@ -30,12 +35,40 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "
 	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+	at pe.edu.upeu.app.dao.AreasDao.update(AreasDao.java:71)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:148)
+
+may. 16, 2023 6:17:56 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.update
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "WHERE": syntax error)
+>>>>>>> Dev3
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.throwex(DB.java:1112)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:117)
+	at org.sqlite.core.DB.prepare(DB.java:267)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:44)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:25)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+<<<<<<< HEAD
 	at pe.edu.upeu.app.dao.PreguntasDao.update(PreguntasDao.java:77)
 	at pe.edu.upeu.app.dao.PreguntasDao.main(PreguntasDao.java:163)
 
 may. 16, 2023 7:14:29 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.PreguntasDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "id_area_periodo": syntax error)
+=======
+	at pe.edu.upeu.app.dao.AreasDao.update(AreasDao.java:71)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:148)
+
+may. 16, 2023 6:42:41 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.update
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (incomplete input)
+>>>>>>> Dev3
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.throwex(DB.java:1112)
@@ -48,12 +81,21 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "
 	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+<<<<<<< HEAD
 	at pe.edu.upeu.app.dao.PreguntasDao.update(PreguntasDao.java:77)
 	at pe.edu.upeu.app.dao.PreguntasDao.main(PreguntasDao.java:163)
 
 may. 16, 2023 7:49:12 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.PreguntasDao.delete
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such table: pregunta)
+=======
+	at pe.edu.upeu.app.dao.AreasDao.update(AreasDao.java:71)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:148)
+
+may. 16, 2023 6:46:35 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.update
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (incomplete input)
+>>>>>>> Dev3
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.throwex(DB.java:1112)
@@ -66,6 +108,7 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no suc
 	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+<<<<<<< HEAD
 	at pe.edu.upeu.app.dao.PreguntasDao.delete(PreguntasDao.java:124)
 	at pe.edu.upeu.app.dao.PreguntasDao.main(PreguntasDao.java:174)
 
@@ -103,6 +146,14 @@ may. 16, 2023 4:23:48 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.BancoPreguntasDao.create
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (table banco_preguntas has no column named nobrearea)
 >>>>>>> dev16
+=======
+	at pe.edu.upeu.app.dao.AreasDao.update(AreasDao.java:71)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:148)
+
+may. 16, 2023 7:00:29 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreasDao.update
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (incomplete input)
+>>>>>>> Dev3
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.throwex(DB.java:1112)
@@ -115,6 +166,7 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (table 
 	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	at pe.edu.upeu.app.dao.ResultadoFinalDao.update(ResultadoFinalDao.java:79)
@@ -210,4 +262,8 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no suc
 	at pe.edu.upeu.app.dao.AreaExamenDao.create(AreaExamenDao.java:45)
 	at pe.edu.upeu.app.dao.AreaExamenDao.main(AreaExamenDao.java:129)
 >>>>>>> dev6
+=======
+	at pe.edu.upeu.app.dao.AreasDao.update(AreasDao.java:71)
+	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:148)
+>>>>>>> Dev3
 
