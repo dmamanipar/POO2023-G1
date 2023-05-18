@@ -1,6 +1,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 may 16, 2023 7:13:47 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.ResultadoFinalDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "punto_conocimiento": syntax error)
@@ -123,6 +124,11 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (table 
 may. 16, 2023 4:25:50 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.BancoPreguntasDao.create
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near ")": syntax error)
+=======
+may. 16, 2023 4:18:07 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.UsuarioDao.create
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "values": syntax error)
+>>>>>>> dev11
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.throwex(DB.java:1112)
@@ -136,12 +142,21 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:150)
+<<<<<<< HEAD
 	at pe.edu.upeu.app.dao.BancoPreguntasDao.create(BancoPreguntasDao.java:42)
 	at pe.edu.upeu.app.dao.BancoPreguntasDao.main(BancoPreguntasDao.java:113)
 
 may. 16, 2023 4:42:10 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.BancoPreguntasDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: nombrearea)
+=======
+	at pe.edu.upeu.app.dao.UsuarioDao.create(UsuarioDao.java:40)
+	at pe.edu.upeu.app.dao.UsuarioDao.main(UsuarioDao.java:139)
+
+may. 16, 2023 8:09:31 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.UsuarioDao.delete
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: id_ussuario)
+>>>>>>> dev11
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.throwex(DB.java:1112)
@@ -154,6 +169,7 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no suc
 	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+<<<<<<< HEAD
 	at pe.edu.upeu.app.dao.BancoPreguntasDao.update(BancoPreguntasDao.java:71)
 	at pe.edu.upeu.app.dao.BancoPreguntasDao.main(BancoPreguntasDao.java:128)
 >>>>>>> dev16
@@ -161,4 +177,26 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no suc
 	at pe.edu.upeu.app.dao.PreguntasDao.update(PreguntasDao.java:84)
 	at pe.edu.upeu.app.dao.PreguntasDao.main(PreguntasDao.java:173)
 >>>>>>> dev20
+=======
+	at pe.edu.upeu.app.dao.UsuarioDao.delete(UsuarioDao.java:88)
+	at pe.edu.upeu.app.dao.UsuarioDao.main(UsuarioDao.java:161)
+
+may. 16, 2023 8:10:12 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.UsuarioDao.delete
+org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no such column: id_ussuario)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.throwex(DB.java:1112)
+	at org.sqlite.core.NativeDB.prepare_utf8(Native Method)
+	at org.sqlite.core.NativeDB.prepare(NativeDB.java:117)
+	at org.sqlite.core.DB.prepare(DB.java:267)
+	at org.sqlite.core.CorePreparedStatement.<init>(CorePreparedStatement.java:44)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.<init>(JDBC3PreparedStatement.java:30)
+	at org.sqlite.jdbc4.JDBC4PreparedStatement.<init>(JDBC4PreparedStatement.java:25)
+	at org.sqlite.jdbc4.JDBC4Connection.prepareStatement(JDBC4Connection.java:34)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:155)
+	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
+	at pe.edu.upeu.app.dao.UsuarioDao.delete(UsuarioDao.java:88)
+	at pe.edu.upeu.app.dao.UsuarioDao.main(UsuarioDao.java:161)
+>>>>>>> dev11
 

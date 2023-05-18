@@ -8,15 +8,12 @@ import lombok.Data;
 
 /**
  *
- * @author acer
+ * @author Jesus
  */
 @Data
-public class PreguntasTO {
-    public int idPregunta, idBp, idAreaPeriodo, numero;
-    public String resultado;
-    //Adicionales por cada forany key
-    public String nombreAreaPeriodo, nombrePregunta;
-
+public class UsuarioTO {
     
-
+    public int idUsuario;
+    public String user, clave, estado, perfil;
+      
 }
