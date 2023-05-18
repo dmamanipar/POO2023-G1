@@ -65,7 +65,7 @@ public class UsuarioDao implements UsuarioDaoI {
                 + "user=?, "
                 + "clave=?, "
                 + "estado=?, "
-                + "perfil=?, ";
+                + "perfil=? where id_usuario=? ";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql);
@@ -73,6 +73,7 @@ public class UsuarioDao implements UsuarioDaoI {
             ps.setString(++i, d.getClave());
             ps.setString(++i, d.getEstado());
             ps.setString(++i, d.getPerfil());
+            ps.setInt(++i, d.getIdUsuario());
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "update", ex);
@@ -99,8 +100,7 @@ public class UsuarioDao implements UsuarioDaoI {
     public List<UsuarioTO> listarTodo() {
         List<UsuarioTO> listarEntidad = new ArrayList();
         String sql = "SELECT * "
-                + "FROM usuario  "
-                + "WHERE id_usuario";
+                + "FROM usuario  ";
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -146,11 +146,11 @@ public class UsuarioDao implements UsuarioDaoI {
                 case "U" -> {
                     UsuarioTO tox;
                     System.out.println("Ingrese el ID USUARIO a Modificar:");
-                    String user = cs.next();
+                    int user = cs.nextInt();
                     tox = po.buscarEntidad(user);
-                    System.out.println("Ingres Nuevo Nombre:");
+                    System.out.println("Ingres Nuevo clave:");
                     tox.setClave(cs.next());
-                    System.out.println("Ingres Nuevo A. Paterno:");
+                    System.out.println("Ingres Nuevo Perfilo:");
                     tox.setPerfil(cs.next());
                     po.update(tox);
                     po.listarPostulantes(po.listarTodo());
@@ -175,9 +175,9 @@ public class UsuarioDao implements UsuarioDaoI {
     }
 
     public void listarPostulantes(List<UsuarioTO> lista) {
-        System.out.println("USUARIO\t\tCLAVE\t\t\tESTADO\t\t\tPERFIL\t\tID_USUARIO");
+        System.out.println("Id\t\tUSUARIO\t\tCLAVE\t\t\tESTADO\t\t\tPERFIL\t\tID_USUARIO");
         for (UsuarioTO p : lista) {
-            System.out.println(p.getUser() + "\t\t" + p.getClave() + "\t\t\t"
+            System.out.println(p.getIdUsuario()+"\t\t"+p.getUser() + "\t\t" + p.getClave() + "\t\t\t"
                     + p.getEstado() + "\t\t\t" + p.getPerfil() + "\t\t\t" + p.getIdUsuario());
         }
     }
@@ -188,14 +188,14 @@ public class UsuarioDao implements UsuarioDaoI {
     }
 
     @Override
-    public UsuarioTO buscarEntidad(String user) {
+    public UsuarioTO buscarEntidad(int iduser) {
         UsuarioTO cli = new UsuarioTO();
         String sql = "SELECT  * "
                 + "FROM usuario "
-                + "WHERE id_usuario";
+                + "WHERE id_usuario=?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, user);
+            ps.setInt(1, iduser);
             rs = ps.executeQuery();
             if (rs.next()) {
                 cli.setUser(rs.getString("user"));

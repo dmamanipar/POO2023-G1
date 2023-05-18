@@ -18,7 +18,7 @@ public int update(UsuarioTO d);
 public int delete(int id) throws Exception;
 public List<UsuarioTO> listCmb(String filter);
 public List<UsuarioTO> listarTodo();
-public UsuarioTO buscarEntidad(String user);
+public UsuarioTO buscarEntidad(int user);
 public List<ModeloDataAutocomplet> listAutoComplet(String filter); 
 public List<ComboBoxOption> listaModalidadExamen();
 public List<ComboBoxOption> listarPeriodo();
