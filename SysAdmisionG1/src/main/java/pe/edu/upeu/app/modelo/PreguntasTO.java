@@ -8,14 +8,15 @@ import lombok.Data;
 
 /**
  *
- * @author EP-Ing_Sist.-CALIDAD
+ * @author acer
  */
 @Data
-public class PostulanteTO {
-    public int idPostulante, idCarrera, idPeriodo;
-    public String dni, nombre, apellidoPat,apellidoMat,modalidad, estado;
+public class PreguntasTO {
+    public int idPregunta, idBp, idAreaPeriodo, numero;
+    public String resultado;
     //Adicionales por cada forany key
-    public String nombrePeriodo, nombreCarrera, nombreModalidad;
+    public String nombreAreaPeriodo, nombrePregunta;
 
     
+
 }
