@@ -36,12 +36,11 @@ public class AreasDao implements AreasDaoI {
     public int create(AreasTO d) {
         int rsId = 0;
         String[] returns = {"id_area"};
-        String sql = "INSERT INTO areas(id_area, nombrearea, siglas)"
-                + " values(?, ?, ?);";
+        String sql = "INSERT INTO areas(nombrearea, siglas)"
+                + " values(?, ?);";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql, returns);
-            ps.setInt(++i, d.getIdAreas());
             ps.setString(++i, d.getNombreArea());
             ps.setString(++i, d.getSiglas());
             rsId = ps.executeUpdate();// 0 no o 1 si commit
@@ -125,9 +124,7 @@ public class AreasDao implements AreasDaoI {
         do {
             switch (opcion) {
                 case "C" -> {
-                    AreasTO tox = new AreasTO();
-                    System.out.println("Ingrese número de orden del Area: ");
-                    tox.setIdAreas(cs.nextInt());
+                    AreasTO tox = new AreasTO();           
                     System.out.println("Ingrese Nombre Area: ");
                     tox.setNombreArea(cs.next());
                     System.out.println("Ingrese sigla: ");
@@ -219,14 +216,6 @@ public class AreasDao implements AreasDaoI {
 
     @Override
     public List<ComboBoxOption> listarSiglas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public int create(AreasDao d) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public int update(AreasDao d) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
