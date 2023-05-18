@@ -15,7 +15,6 @@ import java.util.logging.Level;
 import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
 import pe.edu.upeu.app.conexion.ConnS;
 import pe.edu.upeu.app.modelo.ComboBoxOption;
-import pe.edu.upeu.app.modelo.PostulanteTO;
 import pe.edu.upeu.app.modelo.PreguntasTO;
 import pe.edu.upeu.app.util.ErrorLogger;
 
@@ -226,9 +225,6 @@ public class PreguntasDao implements PreguntasDaoI {
         return cli;
     }
 
-    public void update(PostulanteTO tox) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public List<PreguntasTO> listCmb(String filter) {
@@ -245,10 +241,6 @@ public class PreguntasDao implements PreguntasDaoI {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public List<ComboBoxOption> listarPeriodo() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -264,22 +256,5 @@ public class PreguntasDao implements PreguntasDaoI {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    private PostulanteTO buscarPreguntaS(String dni) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void listarPreguntas(List<PreguntasTO> listarTodo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
-
-    public PreguntasTO buscarEntidad(String dni) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private PreguntasTO buscarPregunta(int Bp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }

@@ -12,8 +12,8 @@ import lombok.Data;
  */
 @Data
 public class PreguntasTO {
-    public int IdPregunta, IdBp, IdAreaPeriodo, numero;
-    public String Resultado;
+    public int idPregunta, idBp, idAreaPeriodo, numero;
+    public String resultado;
     //Adicionales por cada forany key
     public String nombreAreaPeriodo, nombrePregunta;
 
