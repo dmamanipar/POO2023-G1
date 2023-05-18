@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 may. 16, 2023 3:26:40 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.AreaPeriodoDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "WHERE": syntax error)
@@ -128,11 +129,17 @@ may. 16, 2023 7:04:38 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.AreasDao.create
 >>>>>>> Dev3
 org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+=======
+may. 16, 2023 4:03:14 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.FacultadDao.create
+org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: facultad.id_facultad)
+>>>>>>> dev7
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.execute(DB.java:947)
 	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
 	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	at pe.edu.upeu.app.dao.AreaPeriodoDao.update(AreaPeriodoDao.java:77)
@@ -208,23 +215,50 @@ org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database 
 
 may. 16, 2023 5:55:47 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.AreaPeriodoDao.create
+=======
+	at pe.edu.upeu.app.dao.FacultadDao.create(FacultadDao.java:46)
+	at pe.edu.upeu.app.dao.FacultadDao.main(FacultadDao.java:134)
+
+may. 16, 2023 7:26:09 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.FacultadDao.delete
+>>>>>>> dev7
 org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_FOREIGNKEY] A foreign key constraint failed (FOREIGN KEY constraint failed)
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.execute(DB.java:947)
 	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
 	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+<<<<<<< HEAD
 	at pe.edu.upeu.app.dao.AreaPeriodoDao.create(AreaPeriodoDao.java:44)
 	at pe.edu.upeu.app.dao.AreaPeriodoDao.main(AreaPeriodoDao.java:116)
 
 may. 16, 2023 5:55:57 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.AreaPeriodoDao.create
+=======
+	at pe.edu.upeu.app.dao.FacultadDao.delete(FacultadDao.java:109)
+	at pe.edu.upeu.app.dao.FacultadDao.main(FacultadDao.java:151)
+
+may. 16, 2023 7:26:15 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.FacultadDao.delete
+org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_FOREIGNKEY] A foreign key constraint failed (FOREIGN KEY constraint failed)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.FacultadDao.delete(FacultadDao.java:109)
+	at pe.edu.upeu.app.dao.FacultadDao.main(FacultadDao.java:151)
+
+may. 16, 2023 8:20:46 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.FacultadDao.create
+>>>>>>> dev7
 org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.execute(DB.java:947)
 	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
 	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+<<<<<<< HEAD
 	at pe.edu.upeu.app.dao.AreaPeriodoDao.create(AreaPeriodoDao.java:44)
 	at pe.edu.upeu.app.dao.AreaPeriodoDao.main(AreaPeriodoDao.java:116)
 
@@ -246,4 +280,8 @@ org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database 
 	at pe.edu.upeu.app.dao.AreasDao.create(AreasDao.java:47)
 	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:135)
 >>>>>>> Dev3
+=======
+	at pe.edu.upeu.app.dao.FacultadDao.create(FacultadDao.java:46)
+	at pe.edu.upeu.app.dao.FacultadDao.main(FacultadDao.java:131)
+>>>>>>> dev7
 

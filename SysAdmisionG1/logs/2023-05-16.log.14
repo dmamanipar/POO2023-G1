@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 may 16, 2023 6:58:20 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.ResultadoFinalDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "punto_conocimiento": syntax error)
@@ -69,4 +70,16 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "
 	at org.sqlite.jdbc3.JDBC3Connection.prepareStatement(JDBC3Connection.java:135)
 	at pe.edu.upeu.app.dao.ResultadoFinalDao.update(ResultadoFinalDao.java:79)
 	at pe.edu.upeu.app.dao.ResultadoFinalDao.main(ResultadoFinalDao.java:179)
+=======
+may. 16, 2023 7:07:25 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.FacultadDao.delete
+org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_FOREIGNKEY] A foreign key constraint failed (FOREIGN KEY constraint failed)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.FacultadDao.delete(FacultadDao.java:109)
+	at pe.edu.upeu.app.dao.FacultadDao.main(FacultadDao.java:151)
+>>>>>>> dev7
 

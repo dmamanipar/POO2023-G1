@@ -140,3 +140,14 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "
 	at pe.edu.upeu.app.dao.PreguntasDao.main(PreguntasDao.java:157)
 >>>>>>> dev11
 
+may 11, 2023 10:53:23 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.FacultadDao.create
+org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: facultad.id_facultad)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.FacultadDao.create(FacultadDao.java:46)
+	at pe.edu.upeu.app.dao.FacultadDao.main(FacultadDao.java:132)
+

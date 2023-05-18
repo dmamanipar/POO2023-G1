@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 may. 16, 2023 7:07:13 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.PreguntasDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "id_area_periodo": syntax error)
@@ -50,13 +51,55 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "
 =======
 may. 16, 2023 6:38:24 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.AreasDao.create
+=======
+may. 16, 2023 4:50:17 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.FacultadDao.create
+org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_PRIMARYKEY] A PRIMARY KEY constraint failed (UNIQUE constraint failed: facultad.id_facultad)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.FacultadDao.create(FacultadDao.java:46)
+	at pe.edu.upeu.app.dao.FacultadDao.main(FacultadDao.java:134)
+
+may. 16, 2023 7:36:59 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.FacultadDao.update
+>>>>>>> dev7
 org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.execute(DB.java:947)
 	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
 	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+<<<<<<< HEAD
 	at pe.edu.upeu.app.dao.AreasDao.create(AreasDao.java:47)
 	at pe.edu.upeu.app.dao.AreasDao.main(AreasDao.java:134)
 >>>>>>> Dev3
+=======
+	at pe.edu.upeu.app.dao.FacultadDao.update(FacultadDao.java:73)
+	at pe.edu.upeu.app.dao.FacultadDao.main(FacultadDao.java:144)
+
+may. 16, 2023 7:40:52 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.FacultadDao.create
+org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.FacultadDao.create(FacultadDao.java:46)
+	at pe.edu.upeu.app.dao.FacultadDao.main(FacultadDao.java:131)
+
+may. 16, 2023 7:41:58 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.FacultadDao.delete
+org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+	at org.sqlite.core.DB.newSQLException(DB.java:1141)
+	at org.sqlite.core.DB.newSQLException(DB.java:1152)
+	at org.sqlite.core.DB.execute(DB.java:947)
+	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
+	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+	at pe.edu.upeu.app.dao.FacultadDao.delete(FacultadDao.java:108)
+	at pe.edu.upeu.app.dao.FacultadDao.main(FacultadDao.java:150)
+>>>>>>> dev7
 
