@@ -20,7 +20,7 @@ import pe.edu.upeu.app.util.ErrorLogger;
  *
  * @author EP-Ing_Sist.-CALIDAD
  */
-public abstract class AreaExamenDao implements AreaExamenDaoI {
+public class AreaExamenDao implements AreaExamenDaoI {
 
     ConnS instance = ConnS.getInstance();
     Connection connection = instance.getConnection();
@@ -59,14 +59,15 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
     public int update(AreaExamenTO d) {
         System.out.println("actualizar d.getDniruc: " + d.getNombreae());
         int comit = 0;
-        String sql = "UPDATE Areas SET "
-            + "nombreae=?, "
-            + "WHERE Nombreae=?";
+        String sql = "UPDATE area_examen SET "
+            + "nombreae=? "
+            + "WHERE id_area_examen=?";
                 
         int i = 0;
         try {
             ps = connection.prepareStatement(sql);
             ps.setString(++i, d.getNombreae());
+            ps.setInt(++i, d.getIdAreaExamen());
            
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -99,7 +100,7 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
     @Override
     public int delete(int id) throws Exception {
         int comit = 0;
-        String sql = "DELETE FROM areas WHERE IdArea = ?";
+        String sql = "DELETE FROM area_examen WHERE id_area_examen = ?";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
@@ -121,11 +122,8 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
             switch (opcion) {
                 case "C" -> {
                     AreaExamenTO tox = new AreaExamenTO();
-                    System.out.println("Ingrese Nombre:");
+                    System.out.println("Ingrese Nombre Area:");
                     tox.setNombreae(cs.next());
-                    //System.out.println("Ingres Area:");
-                    //tox.setIdAreaExamen(cs.nextInt());
-                    
                     po.create(tox);
                     po.listarAreas(po.listarTodo());
                 }
@@ -133,17 +131,17 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
                     po.listarAreas(po.listarTodo());
                 case "U" -> {
                     AreaExamenTO tox;
-                    System.out.println("Ingrese el Nombre a Modificar:");
+                    System.out.println("Ingrese el ID a Modificar:");
                     int areaExamen=cs.nextInt();
                     tox=po.buscarEntidad(areaExamen);
-                    System.out.println("IngreseNuevo Nombre:");
+                    System.out.println("Ingrese Nuevo Nombre:");
                     tox.setNombreae(cs.next());                   
                     po.update(tox);
                     po.listarAreas(po.listarTodo());
                 }
                 case "D" -> {
                     try {
-                        System.out.println("Ingrese el Nombre del Registro que desea eliminar:");               
+                        System.out.println("Ingrese ID del Registro que desea eliminar:");               
                         po.delete(cs.nextInt());
                         po.listarAreas(po.listarTodo());
                     } catch (Exception e) {
@@ -163,23 +161,22 @@ public abstract class AreaExamenDao implements AreaExamenDaoI {
     public void listarAreas(List<AreaExamenTO> lista) {
         System.out.println("AreaExamen\t\tNombreae.");
         for (AreaExamenTO p : lista) {
-            System.out.println(p.getNombreae());
+            System.out.println(p.getIdAreaExamen()+" \t\t "+p.getNombreae());
         }
     }
 
     @Override
     public AreaExamenTO buscarEntidad(int idAreaExamen) {
         AreaExamenTO cli = new AreaExamenTO();
-        String sql = "SELECT po.*, p.nombreae"
-                + "FROM AreaExamen, nombreae n"
-                + "WHERE p.id_area_examen = po.id_area_examen "
-                + " and po.nombreae=?";
+        String sql = "SELECT * from area_examen "
+                + "WHERE id_area_examen = ? ";
         try {
             ps = connection.prepareStatement(sql);
             ps.setInt(1, idAreaExamen);
             rs = ps.executeQuery();
             if (rs.next()) {
-                cli.setNombreae(rs.getString("id_area_examen"));
+                cli.setNombreae(rs.getString("nombreae"));
+                cli.setIdAreaExamen(rs.getInt("id_area_examen"));
              
                          
             }
