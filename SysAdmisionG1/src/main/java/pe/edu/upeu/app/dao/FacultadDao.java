@@ -66,7 +66,7 @@ public class FacultadDao implements FacultadDaoI {
         try {
             ps = connection.prepareStatement(sql);
             ps.setString(++i, d.getNombreFacultad());
-            /*ps.setInt(++i, d.getIdFacultad());*/
+            ps.setInt(++i, d.getIdFacultad());
    
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
@@ -87,7 +87,6 @@ public class FacultadDao implements FacultadDaoI {
                 FacultadTO cli = new FacultadTO();
                 cli.setIdFacultad(rs.getInt("id_facultad"));
                 cli.setNombreFacultad(rs.getString("nombrefacultad"));
-                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
                 listarEntidad.add(cli);
             }
         } catch (SQLException e) {
@@ -195,24 +194,25 @@ public class FacultadDao implements FacultadDaoI {
         return cli;
     }
       
+    @Override
     public List<ModeloDataAutocomplet> listAutoComplet(String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
     public List<ComboBoxOption> listaModalidadExamen() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
     public List<ComboBoxOption> listarPeriodo() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
     public List<ModeloDataAutocomplet> listAutoCompletCarrera(String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public String buscarModalidadExamen(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }

@@ -15,37 +15,38 @@ import java.util.logging.Level;
 import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
 import pe.edu.upeu.app.conexion.ConnS;
 import pe.edu.upeu.app.modelo.ComboBoxOption;
-import pe.edu.upeu.app.modelo.PostulanteTO;
 import pe.edu.upeu.app.modelo.PreguntasTO;
 import pe.edu.upeu.app.util.ErrorLogger;
 
 /**
  *
- * @author romer
+ * @author acer
  */
-public class PreguntasDao {
+public class PreguntasDao implements PreguntasDaoI {
+
     ConnS instance = ConnS.getInstance();
     Connection connection = instance.getConnection();
     PreparedStatement ps;
     ResultSet rs;
 
     ErrorLogger log = new ErrorLogger(PreguntasDao.class.getName());
-    
+
     //Crear
+    @Override
     public int create(PreguntasTO d) {
         int rsId = 0;
-        String[] returns = {"DNI"};
-        String sql = "INSERT INTO pregunta(id_dni, id_area_periodo "
+        String[] returns = {"id_bp"};
+        String sql = "INSERT INTO preguntas(id_bp, id_area_periodo, "
                 + " resultado, numero) "
                 + " values(?, ?, ?, ?);";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql, returns);
-            ps.setInt(++i, d.getIdPreguntas());
+
             ps.setInt(++i, d.getIdBp());
-            ps.setString(++i, d.getIdAreaPeriodo());
+            ps.setInt(++i, d.getIdAreaPeriodo());
             ps.setString(++i, d.getResultado());
-            ps.setString(++i, d.getNumero());
+            ps.setInt(++i, d.getNumero());
             rsId = ps.executeUpdate();// 0 no o 1 si commit
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -58,55 +59,70 @@ public class PreguntasDao {
         }
         return rsId;
     }
-    
+
     //Actualizar
+    @Override
     public int update(PreguntasTO d) {
-        System.out.println("actualizar d.getdni: " + d.getBp());
+        System.out.println("actualizar d.getIdPregunta: " + d.getIdPregunta());
         int comit = 0;
-        String sql = "UPDATE resultado SET "
-                + "resultado=?, ";
+        String sql = "UPDATE preguntas SET "
+                + "id_bp=?,"
+                + "id_area_periodo=?, "
+                + "resultado=?, "
+                + "numero=? "
+                + "WHERE id_pregunta=?";
         int i = 0;
         try {
             ps = connection.prepareStatement(sql);
+            
+            ps.setInt(++i, d.getIdBp());
+            ps.setInt(++i, d.getIdAreaPeriodo());
             ps.setString(++i, d.getResultado());
+            ps.setInt(++i, d.getNumero());
+            ps.setInt(++i, d.getIdPregunta());
+            
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "update", ex);
         }
         return comit;
     }
-    
-    
+
+    @Override
     public List<PreguntasTO> listarTodo() {
-        List<PreguntasTO> listarEntidad = new ArrayList();
-        String sql = "SELECT p.*, p.pregunta as nombreareaperiodo, b.bp "
-                + "FROM pregunta p, areaperiodo ap, bp b "
-                + "WHERE ap.id_areaperiodo = p.id_pregunta and p.id_bp = b.id_bp";
+        List<PreguntasTO> listarPreguntas = new ArrayList();
+        String sql = "SELECT * FROM preguntas";
+
         try {
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 PreguntasTO cli = new PreguntasTO();
-                cli.setDni(rs.getString("dni"));
                 cli.setIdPregunta(rs.getInt("id_pregunta"));
                 cli.setIdBp(rs.getInt("id_bp"));
-                cli.setNombreAreaPeriodo(rs.getString("nombreareaperiodo"));
-                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
-                listarEntidad.add(cli);
+
+                cli.setIdAreaPeriodo(rs.getInt("id_area_periodo"));
+                cli.setResultado(rs.getString("resultado"));
+
+                //cli.setIdNombreAreaPeriodo(rs.getString("nombrearea_periodo"));
+                cli.setNumero(rs.getInt("numero"));
+
+                listarPreguntas.add(cli);
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
         }
-        return listarEntidad;
+        return listarPreguntas;
     }
-    
+
     //Eliminar
-    public int delete(String id) throws Exception {
+    @Override
+    public int delete(int id) throws Exception {
         int comit = 0;
-        String sql = "DELETE FROM pregunta WHERE dni = ?";
+        String sql = "DELETE FROM preguntas WHERE id_pregunta = ? ";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setInt(1, id);
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "delete", ex);
@@ -114,7 +130,7 @@ public class PreguntasDao {
         }
         return comit;
     }
-    
+
     //CRUD 
     public static void main(String[] args) {
         Scanner cs = new Scanner(System.in);
@@ -127,34 +143,40 @@ public class PreguntasDao {
             switch (opcion) {
                 case "C" -> {
                     PreguntasTO tox = new PreguntasTO();
-                    System.out.println("Ingrese el dni:");
-                    tox.setDni(cs.next());
-                    System.out.println("Ingres Resultado:");
+                    System.out.println("Ingrese el bp:");
+                    tox.setIdBp(cs.nextInt());
+                    System.out.println("Ingrese el areaperiodo:");
+                    tox.setIdAreaPeriodo(cs.nextInt());
+                    System.out.println("Ingrese el resultado:");
                     tox.setResultado(cs.next());
-                    System.out.println("Ingres Numero :");
-                    tox.setNumero(cs.next());
-                    System.out.println("Ingres Pregunta:");
-                    tox.setPregunta(cs.next());
-                    System.out.println("Ingrese Modalidad(E=Examen, PI=Primeros Puestos):");
+                    System.out.println("Ingrese el numero:");
+                    tox.setNumero(cs.nextInt());
+                    po.create(tox);
+                    po.listarPregunta(po.listarTodo());
                 }
                 case "R" ->
                     po.listarPregunta(po.listarTodo());
                 case "U" -> {
-                    PostulanteTO tox;
-                    System.out.println("Ingrese el dni a Modificar:");
-                    String dni=cs.next();
-                    tox=po.buscarEntidad(dni);
-                    System.out.println("Ingres Area Periodo:");
-                    tox.setAreaPeriodo(cs.next());
-                    System.out.println("Ingres Id pregunta:");
-                    tox.setPregunta(cs.next());                    
+                    PreguntasTO tox;
+                    System.out.println("Ingrese el id pregiunta a Modificar:");
+                    int IdPregunta=cs.nextInt();
+                    tox = po.buscarEntidad(IdPregunta);
+                    System.out.println("Ingrese id BP:");
+                    tox.setIdBp(cs.nextInt());
+                    System.out.println("Ingrese AREA periodo:");
+                    tox.setIdAreaPeriodo(cs.nextInt());
+                    System.out.println("Ingrese resultado:");
+                    tox.setResultado(cs.next());
+                    System.out.println("Ingrese numero:");
+                    tox.setNumero(cs.nextInt());
+                    
                     po.update(tox);
                     po.listarPregunta(po.listarTodo());
                 }
                 case "D" -> {
                     try {
-                        System.out.println("Ingrese el dni del Registro que desea eliminar:");
-                        po.delete(cs.next());
+                        System.out.println("Ingrese el id pregunta que desea eliminar:");
+                        po.delete(cs.nextInt());
                         po.listarPregunta(po.listarTodo());
                     } catch (Exception e) {
                         System.err.println("Error al Eliminar");
@@ -171,39 +193,68 @@ public class PreguntasDao {
     }
 
     public void listarPregunta(List<PreguntasTO> lista) {
-        System.out.println("BP\t\tArePeriodo\t\t\tResultado");
+        System.out.println("idpregunta\t\t\tbp\t\t\tArePeriodo\t\tResultado\t\tNumero");
         for (PreguntasTO p : lista) {
-            System.out.println(p.getBp() + "\t" + p.getResultado() + "\t\t\t");
+            System.out.println(p.getIdPregunta()+ "\t\t\t" + p.getIdBp() + "\t\t\t\t\t" + p.getIdAreaPeriodo() + "\t\t\t" + p.getResultado() + "\t\t\t\t\t" + p.getNumero());
         }
     }
 
-    public PostulanteTO buscarEntidad(String bp) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    @Override
+    public PreguntasTO buscarEntidad(int id_pregunta) {
+        PreguntasTO cli = new PreguntasTO();
+        String sql = "SELECT * "
+                + "FROM preguntas "
+                + "WHERE id_pregunta=?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id_pregunta);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                cli.setIdPregunta(rs.getInt("id_pregunta"));
+                cli.setIdBp(rs.getInt("id_bp"));
+                
+                cli.setIdAreaPeriodo(rs.getInt("id_area_periodo"));
+                cli.setResultado(rs.getString("resultado"));
+                cli.setNumero(rs.getInt("numero"));
+
+                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));               
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return cli;
     }
 
-    public void update(PostulanteTO tox) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
+
+    @Override
     public List<PreguntasTO> listCmb(String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+    @Override
     public List<ModeloDataAutocomplet> listAutoComplet(String filter) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
+    @Override
     public List<ComboBoxOption> listaModalidadExamen() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
+    @Override
     public List<ComboBoxOption> listarPeriodo() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public List<ModeloDataAutocomplet> listAutoCompletCarrera(String filter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String buscarModalidadExamen(String id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 
-    
 }
