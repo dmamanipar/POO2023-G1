@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 may 16, 2023 7:13:47 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.ResultadoFinalDao.update
 org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (near "punto_conocimiento": syntax error)
@@ -72,11 +73,17 @@ may. 16, 2023 7:59:57 P. M. pe.edu.upeu.app.util.ErrorLogger log
 SEVERE: pe.edu.upeu.app.dao.PreguntasDao.update
 >>>>>>> dev20
 org.sqlite.SQLiteException: [SQLITE_CONSTRAINT_FOREIGNKEY] A foreign key constraint failed (FOREIGN KEY constraint failed)
+=======
+may. 16, 2023 8:14:19 P. M. pe.edu.upeu.app.util.ErrorLogger log
+SEVERE: pe.edu.upeu.app.dao.AreaExamenDao.create
+org.sqlite.SQLiteException: [SQLITE_BUSY] The database file is locked (database is locked)
+>>>>>>> dev6
 	at org.sqlite.core.DB.newSQLException(DB.java:1141)
 	at org.sqlite.core.DB.newSQLException(DB.java:1152)
 	at org.sqlite.core.DB.execute(DB.java:947)
 	at org.sqlite.core.DB.executeUpdate(DB.java:1016)
 	at org.sqlite.jdbc3.JDBC3PreparedStatement.executeUpdate(JDBC3PreparedStatement.java:90)
+<<<<<<< HEAD
 <<<<<<< HEAD
 	at pe.edu.upeu.app.dao.BancoPreguntasDao.create(BancoPreguntasDao.java:47)
 	at pe.edu.upeu.app.dao.BancoPreguntasDao.main(BancoPreguntasDao.java:111)
@@ -199,4 +206,8 @@ org.sqlite.SQLiteException: [SQLITE_ERROR] SQL error or missing database (no suc
 	at pe.edu.upeu.app.dao.UsuarioDao.delete(UsuarioDao.java:88)
 	at pe.edu.upeu.app.dao.UsuarioDao.main(UsuarioDao.java:161)
 >>>>>>> dev11
+=======
+	at pe.edu.upeu.app.dao.AreaExamenDao.create(AreaExamenDao.java:45)
+	at pe.edu.upeu.app.dao.AreaExamenDao.main(AreaExamenDao.java:129)
+>>>>>>> dev6
 
