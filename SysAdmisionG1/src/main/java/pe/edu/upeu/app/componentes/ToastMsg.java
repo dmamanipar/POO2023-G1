@@ -4,17 +4,80 @@
  */
 package pe.edu.upeu.app.componentes;
 
+import java.awt.Color;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.ImageIcon;
+import pe.edu.upeu.app.util.UtilsX;
+
 /**
  *
  * @author Data_Science
  */
 public class ToastMsg extends javax.swing.JPanel {
 
+    private static ImageIcon icono = null;
+    private static ImageIcon iconoError = null;
+    UtilsX obj = new UtilsX();
+
     /**
      * Creates new form ToastMsg
      */
     public ToastMsg() {
         initComponents();
+        icono = new ImageIcon(obj.getFile("img/correcto.png"));
+        iconoError = new ImageIcon(obj.getFile("img/error.png"));
+        this.setOpaque(false);
+    }
+
+    public void error(String msgText) {
+        error(msgText, false);
+    }
+
+    public void error(String msgText, boolean type) {
+        msg.setText(msgText);
+        msg.setForeground(new java.awt.Color(255, 0, 0));
+        if (type) {
+            jLabel1.setIcon(iconoError);
+            this.setBackground(Color.BLACK);
+        } else {
+            jLabel1.setIcon(icono);
+            this.setBackground(Color.WHITE);
+        }
+    }
+
+    public void mostarComponentes() {
+        jLabel1.setVisible(true);
+        msg.setVisible(true);
+    }
+
+    public void ocultarComponentes() {
+        jLabel1.setVisible(false);
+        msg.setVisible(false);
+    }
+
+    public void success(String msgText) {
+        mostarComponentes();
+        jLabel1.setIcon(icono);
+        msg.setText(msgText);
+        msg.setForeground(new java.awt.Color(0, 0, 100));
+        setOpaque(false);
+        temporizador(2);
+    }
+
+    public void temporizador(int time) {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            int i = time;
+
+            public void run() {
+                i--;
+                if (i < 0) {
+                    timer.cancel();
+                    ocultarComponentes();
+                }
+            }
+        }, 0, 1000);
     }
 
     /**
