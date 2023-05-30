@@ -123,16 +123,30 @@ public class GUIMain extends JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println("pasa por aqui");
             Container contai = GUIMain.this.getContentPane();
+            if(((JMenuItem)e.getSource()).getName().equals("miareas")){
+            //System.out.println("holas si llega");
+            jtpane.removeAll();
+            MainAreas area=new MainAreas();
+            area.setPreferredSize(new Dimension(1024, 800));
+            scrollPane=new JScrollPane(area);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+            jtpane.add(scrollPane,"Areas");
+            contai.add(BorderLayout.CENTER,jtpane);//CENTER=CENTRO
+            contai.validate();
+            contai.repaint();    
+          }
+            
             if (((JMenuItem) e.getSource()).getName().equals("mimiselectall")) {
                 jtpane.removeAll();//remueve todo el contenido
                 /*MainPostulante jp = new MainPostulante();
-//jp.setPreferredSize(new Dimension(2000, 1000));
+                //jp.setPreferredSize(new Dimension(2000, 1000));
                 scrollPane = new JScrollPane(jp);
                 scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
                 );
-scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED
+                scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED
                 ); 
-jtpane.add("main", scrollPane);*/
+                jtpane.add("main", scrollPane);*/
 
                 JPanel pp1 = new JPanel();
                 pp1.setPreferredSize(new Dimension(2000, 1000));
