@@ -123,6 +123,20 @@ public class GUIMain extends JFrame {
         public void actionPerformed(ActionEvent e) {
             System.out.println("pasa por aqui");
             Container contai = GUIMain.this.getContentPane();
+            if (((JMenuItem)e.getSource()).getName().equals("mibancopreguntas")){
+               // System.out.println("holas si llega");
+               jtpane.removeAll();
+               MainIdBp map=new MainIdBp();
+               map.setPreferredSize(new Dimension(1024, 800));
+               scrollPane = new JScrollPane(map);
+               scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+               scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+               jtpane.add(scrollPane, "Banco Preguntas");
+               contai.add(BorderLayout.CENTER, jtpane);
+               contai.validate();
+               contai.repaint();
+            }
+            
             if (((JMenuItem) e.getSource()).getName().equals("mimiselectall")) {
                 jtpane.removeAll();//remueve todo el contenido
                 /*MainPostulante jp = new MainPostulante();
