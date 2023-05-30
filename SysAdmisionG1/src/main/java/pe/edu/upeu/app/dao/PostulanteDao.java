@@ -114,7 +114,7 @@ public class PostulanteDao implements PostulanteDaoI {
                 cli.setIdPeriodo(rs.getInt("id_periodo"));
                 cli.setNombrePeriodo(rs.getString("nombreperiodo"));
                 cli.setNombreCarrera(rs.getString("nombrecarrera"));
-                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
+                cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
                 listarEntidad.add(cli);
             }
         } catch (SQLException e) {
@@ -173,12 +173,12 @@ public class PostulanteDao implements PostulanteDaoI {
                 case "U" -> {
                     PostulanteTO tox;
                     System.out.println("Ingrese el DNI a Modificar:");
-                    String dni=cs.next();
-                    tox=po.buscarEntidad(dni);
+                    String dni = cs.next();
+                    tox = po.buscarEntidad(dni);
                     System.out.println("Ingres Nuevo Nombre:");
                     tox.setNombre(cs.next());
                     System.out.println("Ingres Nuevo A. Paterno:");
-                    tox.setApellidoPat(cs.next());                    
+                    tox.setApellidoPat(cs.next());
                     po.update(tox);
                     po.listarPostulantes(po.listarTodo());
                 }
@@ -211,7 +211,11 @@ public class PostulanteDao implements PostulanteDaoI {
 
     @Override
     public List<PostulanteTO> listCmb(String filter) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<PostulanteTO> ls = new ArrayList();
+
+        ls.add(new PostulanteTO());
+        ls.addAll(listarTodo());
+        return ls;
     }
 
     @Override
@@ -236,7 +240,7 @@ public class PostulanteDao implements PostulanteDaoI {
                 cli.setIdPeriodo(rs.getInt("id_periodo"));
                 cli.setNombrePeriodo(rs.getString("nombreperiodo"));
                 cli.setNombreCarrera(rs.getString("nombrecarrera"));
-                //cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));               
+                cli.setNombreModalidad(buscarModalidadExamen(rs.getString("modalidad")));
             }
         } catch (SQLException e) {
             System.out.println(e.toString());
@@ -246,26 +250,85 @@ public class PostulanteDao implements PostulanteDaoI {
 
     @Override
     public List<ModeloDataAutocomplet> listAutoComplet(String filter) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ModeloDataAutocomplet> listarentidad = new ArrayList();
+        String sql = "SELECT * FROM postulante WHERE nombre like ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, filter + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ModeloDataAutocomplet data = new ModeloDataAutocomplet();
+                //ModeloDataAutocomplet.TIPE_DISPLAY = "ID";
+                data.setIdx(rs.getString("dni"));
+                data.setNombreDysplay(rs.getString("nombre"));
+                data.setOtherData(rs.getString("modalidad"));
+                listarentidad.add(data);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return listarentidad;
     }
 
     @Override
     public List<ComboBoxOption> listaModalidadExamen() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ComboBoxOption> dd = new ArrayList<>();
+        dd.add(new ComboBoxOption("EG", "Examen General"));
+        dd.add(new ComboBoxOption("PP", "Primeros Puesto"));
+        dd.add(new ComboBoxOption("PR", "Profesionales"));
+        dd.add(new ComboBoxOption("ES", "Especial"));
+        return dd;
     }
 
     @Override
     public List<ComboBoxOption> listarPeriodo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ComboBoxOption> dd = new ArrayList<>();
+        String sql = "SELECT * FROM periodo";
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                dd.add(new ComboBoxOption(String.valueOf(rs.getInt("id_periodo")),
+                        rs.getString("nombre")));
+
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return dd;
     }
 
     @Override
     public List<ModeloDataAutocomplet> listAutoCompletCarrera(String filter) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ModeloDataAutocomplet> listarentidad = new ArrayList();
+        String sql = "SELECT * FROM carrera WHERE nombrecarrera like ?";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, filter + "%");
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                ModeloDataAutocomplet data = new ModeloDataAutocomplet();
+                //ModeloDataAutocomplet.TIPE_DISPLAY = "ID";
+                data.setIdx(rs.getString("id_carrera"));
+                data.setNombreDysplay(rs.getString("nombrecarrera"));
+                data.setOtherData(rs.getString("id_area_examen"));
+                listarentidad.add(data);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+        return listarentidad;
     }
 
     @Override
     public String buscarModalidadExamen(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ComboBoxOption> dd = listaModalidadExamen();
+        String nombre = "";
+        for (ComboBoxOption comboBoxOption : dd) {
+            if (comboBoxOption.getKey().equals(id)) {
+                nombre = comboBoxOption.getValue();
+            }
+        }
+        return nombre;
     }
 }

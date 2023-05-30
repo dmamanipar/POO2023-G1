@@ -4,11 +4,16 @@
  */
 package pe.edu.upeu.app.modelo;
 
+import lombok.Data;
 
 /**
  *
- * @author Jose MP
+ * @author INTEL
  */
-public class BancopreguntasTO {
-    
+@Data
+public class BancoPreguntasTO {
+    public int idBancoPreguntas,idArea;
+    public String pregunta, nombrearea; 
+
+ 
 }
