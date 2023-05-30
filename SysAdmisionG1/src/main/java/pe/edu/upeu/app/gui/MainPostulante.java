@@ -267,6 +267,12 @@ public class MainPostulante extends javax.swing.JPanel {
 
         jLabel2.setText("DNI:");
 
+        txtDni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDniActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Nombres:");
 
         jLabel4.setText("A. Paterno:");
@@ -570,6 +576,10 @@ public class MainPostulante extends javax.swing.JPanel {
         jTable1.setRowSorter(trsfiltro);
 
     }//GEN-LAST:event_txtFiltroKeyTyped
+
+    private void txtDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDniActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDniActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
