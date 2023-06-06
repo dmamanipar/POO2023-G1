@@ -26,7 +26,6 @@ public class MenuMenuItemDao implements MenuMenuItenDaoI {
                 idioma.getProperty("menuitem.nombre.postulante"), "miselectall"));
         lista.add(new MenuMenuItenTO("Help", "Ver1", "miver1"));
         lista.add(new MenuMenuItenTO("Help", "Ver2", "miver2"));
-        lista.add(new MenuMenuItenTO("Principal", "A. Perioso Result", "aperiodoresult"));
         
         List<MenuMenuItenTO> accesoReal = new ArrayList<>();
         switch (perfil) {
