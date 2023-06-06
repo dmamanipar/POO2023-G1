@@ -4,20 +4,26 @@
  */
 package pe.edu.upeu.app.gui;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import pe.com.syscenterlife.autocomp.AutoCompleteTextField;
 import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
 import pe.com.syscenterlife.formvalid.Validator;
 import pe.com.syscenterlife.formvalid.ValidatorItem;
+import pe.com.syscenterlife.jtablecomp.ButtonsEditor;
+import pe.com.syscenterlife.jtablecomp.ButtonsPanel;
+import pe.com.syscenterlife.jtablecomp.ButtonsRenderer;
 import pe.edu.upeu.app.dao.PostulanteDao;
 import pe.edu.upeu.app.dao.PostulanteDaoI;
 import pe.edu.upeu.app.modelo.ComboBoxOption;
@@ -87,8 +93,17 @@ public class MainPostulante extends javax.swing.JPanel {
         List<PostulanteTO> listarCleintes = cDao.listarTodo();
         jTable1.setAutoCreateRowSorter(true);
         modelo = (DefaultTableModel) jTable1.getModel();
+        
+        ButtonsPanel.metaDataButtons=new String[][]{{"","img/del-icon.png"}, 
+            {"","img/shop-cart-add-icon.png"}};
+        jTable1.setRowHeight(40);
+        TableColumn tablecolumn=jTable1.getColumnModel().getColumn(9);
+        tablecolumn.setCellRenderer(new ButtonsRenderer());
+        ButtonsEditor be=new ButtonsEditor(jTable1);
+        tablecolumn.setCellEditor(be);
+        
         modelo.setNumRows(0);
-        Object[] ob = new Object[9];
+        Object[] ob = new Object[10];
         int cont = -1;
         for (int i = 0; i < listarCleintes.size(); i++) {
             ob[++cont] = i + 1;
@@ -100,12 +115,36 @@ public class MainPostulante extends javax.swing.JPanel {
             ob[++cont] = listarCleintes.get(i).getEstado();
             ob[++cont] = listarCleintes.get(i).getNombrePeriodo();
             ob[++cont] = listarCleintes.get(i).getNombreCarrera();
+            ob[++cont] = "";
             cont = -1;
             modelo.addRow(ob);
         }
         jTable1.setModel(modelo);
-    }
+        
+        JButton ss=be.getCellEditorValue().buttons.get(0);
+        ss.addActionListener((ActionEvent e) -> {
+            System.out.println("VERRRRRR:");            
+            int row = jTable1.convertRowIndexToModel(jTable1.getEditingRow());
+            Object o = jTable1.getModel().getValueAt(row, 1);
+            cDao=new PostulanteDao();
+            try {
+                cDao.delete(String.valueOf(o));
+                listarDatos();
+            } catch (Exception ex) {
+                System.err.println("Error:"+ex.getMessage());
+            }
+            System.out.println("AAAA:"+String.valueOf(o)); 
+            JOptionPane.showMessageDialog(this, "Editing: " + o);
+        }); 
+        
+        JButton b2=be.getCellEditorValue().buttons.get(1);
+        b2.addActionListener((ActionEvent e) -> {            
+            int row = jTable1.convertRowIndexToModel(jTable1.getEditingRow());
+            Object o = jTable1.getModel().getValueAt(row, 1);
+            System.out.println("Puedes Editar aqui: DNI="+o.toString());
+        });
 
+    }
     private void paintForm() {
         if (jTable1.getSelectedRow() != -1) {
             modelo = (DefaultTableModel) jTable1.getModel();
@@ -378,7 +417,7 @@ public class MainPostulante extends javax.swing.JPanel {
 
             },
             new String [] {
-                "#", "DNI", "Nombres", "A. Paterno", "A. Materno", "Modalidad", "Estado", "Periodo", "Carrera"
+                "#", "DNI", "Nombres", "A. Paterno", "A. Materno", "Modalidad", "Estado", "Periodo", "Carrera", "Opc"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
