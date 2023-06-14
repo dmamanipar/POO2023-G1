@@ -152,11 +152,11 @@ scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED
 jtpane.add("main", scrollPane);*/
 
                 JPanel pp1 = new JPanel();
-                pp1.setPreferredSize(new Dimension(2000, 1000));
+                pp1.setPreferredSize(new Dimension(1024, 600));
                 JPanel pp2 = new JPanel();
-                pp2.setPreferredSize(new Dimension(2000, 1000));
+                pp2.setPreferredSize(new Dimension(1024, 600));
                 MainPostulante mp=new MainPostulante();
-                mp.setPreferredSize(new Dimension(2000, 1000));
+                mp.setPreferredSize(new Dimension(1024, 600));
                 scrollPane = new JScrollPane(mp);
                 scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
                 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);     
