@@ -4,7 +4,7 @@
 package pe.edu.upeu.app;
 
 import java.util.prefs.Preferences;
-import pe.edu.upeu.app.gui.GUIMain;
+import pe.edu.upeu.app.gui.Login;
 import pe.edu.upeu.app.util.UtilsX;
 
 /**
@@ -18,7 +18,6 @@ public class SysAdmisionG1 {
     public static void main(String[] args) {
         userPrefs.put("IDIOMAX", new UtilsX().readLanguageFile());
         userPrefs.put("PERFIL", "Admin");
-        new GUIMain().setVisible(true);
-        System.out.println("Hello World!");
+        new Login().setVisible(true);
     }
 }

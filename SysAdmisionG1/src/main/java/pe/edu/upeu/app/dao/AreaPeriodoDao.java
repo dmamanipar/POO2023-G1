@@ -82,12 +82,12 @@ public class AreaPeriodoDao implements AreaPeriodoDaoI {
     }
 
     @Override
-    public int delete(String id) throws Exception {
+    public int delete(int id) throws Exception {
         int comit = 0;
         String sql = "DELETE FROM area_periodo WHERE id_area_periodo = ?";
         try {
             ps = connection.prepareStatement(sql);
-            ps.setString(1, id);
+            ps.setInt(1, id);
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "delete", ex);
@@ -138,7 +138,7 @@ public class AreaPeriodoDao implements AreaPeriodoDaoI {
                 case "D" -> {
                     try {
                         System.out.println("Ingrese el id area periodo del Registro que desea eliminar:");
-                        po.delete(cs.next());
+                        po.delete(cs.nextInt());
                         po.listarAreaPeriodo(po.listarTodo());
                     } catch (Exception e) {
                         System.err.println("Error al Eliminar");
