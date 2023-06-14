@@ -122,7 +122,7 @@ public class GUIMain extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("pasa por aqui");
-            Container contai = GUIMain.this.getContentPane();
+            Container contai = GUIMain.this.getContentPane(); 
             if(((JMenuItem)e.getSource()).getName()
                     .equals("miaperidoresult")){
                 //System.out.println("Holas si llega");
@@ -139,7 +139,21 @@ public class GUIMain extends JFrame {
                 contai.validate();
                 contai.repaint();
             }
-            
+            if(((JMenuItem)e.getSource()).getName().equals("miareaperiodo")){
+                System.out.println("Si llega!");
+                jtpane.removeAll();
+                MainAreaPeriodo map=new MainAreaPeriodo();
+                map.setPreferredSize(new Dimension(1000, 600));
+                scrollPane=new JScrollPane(map);
+                scrollPane.setHorizontalScrollBarPolicy(
+                        JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+                scrollPane.setVerticalScrollBarPolicy(
+                        JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+                jtpane.add("A.Periodo", scrollPane);
+                contai.add(BorderLayout.CENTER, jtpane);
+                contai.validate();
+                contai.repaint();
+            }            
             if (((JMenuItem) e.getSource()).getName().equals("mimiselectall")) {
                 jtpane.removeAll();//remueve todo el contenido
                 /*MainPostulante jp = new MainPostulante();
