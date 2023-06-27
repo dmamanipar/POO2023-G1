@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4ed10e33-8113-4424-8a73-f8fac25687ab">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="modalidadx" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="imagenx" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select c.nombrecarrera, pe.nombre as periodo, p.* 
+from postulante p, carrera c, periodo pe
+where p.id_carrera=c.id_carrera 
+and p.id_periodo=pe.id_periodo and p.modalidad like $P{modalidadx}||'%';]]>
+	</queryString>
+	<field name="nombrecarrera" class="java.lang.Object"/>
+	<field name="periodo" class="java.lang.Object"/>
+	<field name="id_postulante" class="java.lang.Object"/>
+	<field name="id_carrera" class="java.lang.Object"/>
+	<field name="id_periodo" class="java.lang.Object"/>
+	<field name="dni" class="java.lang.Object"/>
+	<field name="nombre" class="java.lang.Object"/>
+	<field name="apellido_pat" class="java.lang.Object"/>
+	<field name="apellido_mat" class="java.lang.Object"/>
+	<field name="modalidad" class="java.lang.Object"/>
+	<field name="estado" class="java.lang.Object"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="0" width="228" height="45" uuid="c1a9eb23-3a77-4f7f-b900-1a8159df30c5"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Postulantes por Modalidad]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="86" height="65" uuid="7891527a-61a6-4a74-89f6-1d4749aac3bc"/>
+				<imageExpression><![CDATA[$P{imagenx}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="2" width="51" height="20" uuid="cac16dbc-e44d-4a92-9b7f-f7f7eae0ca05"/>
+				<text><![CDATA[dni]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="65" y="2" width="100" height="20" uuid="e9884833-b70c-4ff9-a4b5-481cf9f67f3c"/>
+				<text><![CDATA[nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="2" width="100" height="20" uuid="7d6f3a8a-d4b6-4b1b-a249-b82f1d232016"/>
+				<text><![CDATA[apellido_pat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="2" width="100" height="20" uuid="98145af0-92f3-4682-b133-462e59c98aa2"/>
+				<text><![CDATA[nombrecarrera]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="2" width="100" height="20" uuid="e4b3c527-5d91-4330-b0ff-639fa35b3317"/>
+				<text><![CDATA[periodo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="2" width="75" height="20" uuid="f01060e7-3c5f-497d-8413-2260b2af128c"/>
+				<text><![CDATA[modalidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="32" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="5" width="51" height="20" uuid="f9bb0522-18aa-4d28-956e-9b30a090f490"/>
+				<textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="5" width="100" height="20" uuid="9d17c51e-ac73-43d2-b23c-b7ecd5f0ab9f"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="5" width="100" height="20" uuid="bc292c3b-a590-4aa3-91c3-00c33883e1ee"/>
+				<textFieldExpression><![CDATA[$F{apellido_pat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="4" width="100" height="20" uuid="b6c9f517-825e-4c39-8381-79ee54f62827"/>
+				<textFieldExpression><![CDATA[$F{nombrecarrera}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="374" y="3" width="100" height="20" uuid="3376c81d-f26f-490a-98a0-9996efa9e32b"/>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="4" width="75" height="20" uuid="a839c9b2-7f81-4271-882e-3146cc76f9fd"/>
+				<textFieldExpression><![CDATA[$F{modalidad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -12,6 +12,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -22,6 +25,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -30,6 +41,7 @@ import pe.com.syscenterlife.autocomp.ModeloDataAutocomplet;
 import pe.com.syscenterlife.jtablecomp.ButtonsEditor;
 import pe.com.syscenterlife.jtablecomp.ButtonsPanel;
 import pe.com.syscenterlife.jtablecomp.ButtonsRenderer;
+import pe.edu.upeu.app.conexion.ConnS;
 import pe.edu.upeu.app.dao.AreaPeriodoDao;
 import pe.edu.upeu.app.dao.AreaPeriodoDaoI;
 import pe.edu.upeu.app.modelo.AreaPeriodoTO;
@@ -132,6 +144,7 @@ public class MainAreaPeriodo extends javax.swing.JPanel {
         btnImpHeadDB = new javax.swing.JButton();
         btnInsertDB = new javax.swing.JButton();
         btnExpHead = new javax.swing.JButton();
+        btnRepPost = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         comboBoxSuggestion1 = new pe.com.syscenterlife.comboauto.ComboBoxSuggestion();
@@ -193,14 +206,27 @@ public class MainAreaPeriodo extends javax.swing.JPanel {
             }
         });
 
+        btnRepPost.setText("R.Postulantes");
+        btnRepPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRepPostActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(273, 273, 273)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel1)
+                        .addGap(273, 273, 273))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnRepPost)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnImpExcel)
@@ -237,7 +263,8 @@ public class MainAreaPeriodo extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnImpExcel)
                     .addComponent(btnExpExcel)
-                    .addComponent(btnExpFromDB))
+                    .addComponent(btnExpFromDB)
+                    .addComponent(btnRepPost))
                 .addContainerGap())
         );
 
@@ -672,6 +699,35 @@ public class MainAreaPeriodo extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnExpHeadActionPerformed
 
+    private void btnRepPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRepPostActionPerformed
+        // TODO add your handling code here:
+        runReport1();
+    }//GEN-LAST:event_btnRepPostActionPerformed
+
+    private void runReport1() {
+        try {
+            ConnS instance = ConnS.getInstance();            
+            HashMap param = new HashMap();
+            JasperDesign jdesign = JRXmlLoader.load(getFile("reportpost.jrxml"));
+            JasperReport jreport = JasperCompileManager.compileReport(jdesign);
+            JasperPrint jprint = JasperFillManager.fillReport(jreport, param, instance.getConnection());                       
+            JasperViewer.viewReport(jprint, false);
+
+        } catch (JRException ex) {
+            System.out.println("Error:\n" + ex.getLocalizedMessage());
+        }
+    } 
+    
+    
+    public File getFile(String filex) {
+        File newFolder = new File("jasper");
+        String ruta = newFolder.getAbsolutePath();
+        //CAMINO = Paths.get(ruta+"/"+"reporte1.jrxml");            
+        Path CAMINO = Paths.get(ruta + "/" + filex);
+        System.out.println("Llegasss Ruta 2:" + CAMINO.toFile().getAbsolutePath());
+        return CAMINO.toFile();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExpExcel;
@@ -680,6 +736,7 @@ public class MainAreaPeriodo extends javax.swing.JPanel {
     private javax.swing.JButton btnImpExcel;
     private javax.swing.JButton btnImpHeadDB;
     private javax.swing.JButton btnInsertDB;
+    private javax.swing.JButton btnRepPost;
     private pe.com.syscenterlife.comboauto.ComboBoxSuggestion comboBoxSuggestion1;
     private pe.com.syscenterlife.comboauto.ComboBoxSuggestion comboBoxSuggestion2;
     private javax.swing.JButton jButton1;
